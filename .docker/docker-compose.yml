@@ -29,6 +29,29 @@ services:
             db:
                 condition: service_started
 
+    consul:
+        image: consul:1.15.4
+
+        ports:
+            - published: 8500
+              target: 8500
+
+        environment:
+            CONSUL_BIND_INTERFACE: eth0
+
+    consul-kv-init:
+        image: bitsofinfo/files-to-consul-kv:1.0.6
+
+        volumes:
+            -   type: bind
+                source: ./consul
+                target: /kv-source
+
+        # Usage: https://github.com/bitsofinfo/files-to-consul-kv
+        command: "fs2consulkv.py -p /kv-source/properties -c http://consul:8500 -k config/ -t iamacl -s 1 --skip-prompt"
+#        command: "sh /kv-source/init_kv.sh"
+
+
 
 #   TODO postgres data: need entry data, setup accounts for each service, define structures, ...
 #    volumes:

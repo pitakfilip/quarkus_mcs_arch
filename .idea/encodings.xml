@@ -1,21 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/account/account-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/account-api/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/account-app/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/account-app/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/account-domain/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/account-domain/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/api/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/application/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/application/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/account/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/foundation/foundation-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/foundation/foundation-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/foundation/foundation-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/foundation/foundation-application/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/foundation/foundation-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/foundation/foundation-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/foundation/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/foundation/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/infrastructure/infrastructure-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/infrastructure/infrastructure-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/infrastructure/infrastructure-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/infrastructure/infrastructure-application/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/infrastructure/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/infrastructure/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kingdom/kingdom-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kingdom/kingdom-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kingdom/kingdom-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kingdom/kingdom-application/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kingdom/kingdom-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kingdom/kingdom-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kingdom/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/kingdom/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/simulation/simulation-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/simulation/simulation-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/simulation/simulation-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/simulation/simulation-application/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/simulation/simulation-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/simulation/simulation-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/simulation/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/simulation/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warfare/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warfare/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warfare/warfare-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warfare/warfare-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warfare/warfare-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warfare/warfare-application/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warfare/warfare-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warfare/warfare-domain/src/main/resources" charset="UTF-8" />
   </component>
 </project>

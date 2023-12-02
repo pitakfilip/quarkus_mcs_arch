@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cz.muni.soa</groupId>
+    <artifactId>warfare</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>warfare-api</module>
+        <module>warfare-domain</module>
+        <module>warfare-application</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <compiler-plugin.version>3.11.0</compiler-plugin.version>
+        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+
+        <!--   DOMAIN     -->
+        <infrastructure.version>1.0-SNAPSHOT</infrastructure.version>
+        <kingdom.version>1.0-SNAPSHOT</kingdom.version>
+        <foundation.version>1.0-SNAPSHOT</foundation.version>
+        <!--   TECH     -->
+        <quarkus.platform.version>3.6.0</quarkus.platform.version>
+        <jakarta-persistence.version>3.1.0</jakarta-persistence.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cz.muni.soa.warfare</groupId>
+                <artifactId>warfare-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cz.muni.soa.warfare</groupId>
+                <artifactId>warfare-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cz.muni.soa.kingdom</groupId>
+                <artifactId>kingdom-api</artifactId>
+                <version>${kingdom.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cz.muni.soa.foundation</groupId>
+                <artifactId>foundation-api</artifactId>
+                <version>${foundation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cz.muni.soa.infrastructure</groupId>
+                <artifactId>infrastructure-api</artifactId>
+                <version>${infrastructure.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cz.muni.soa.infrastructure</groupId>
+                <artifactId>infrastructure-application</artifactId>
+                <version>${infrastructure.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.quarkus.platform</groupId>
+                <artifactId>quarkus-bom</artifactId>
+                <version>${quarkus.platform.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.persistence</groupId>
+                <artifactId>jakarta.persistence-api</artifactId>
+                <version>${jakarta-persistence.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
