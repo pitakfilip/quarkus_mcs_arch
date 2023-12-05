@@ -10,4 +10,5 @@ public class KingdomPanacheRepository implements PanacheRepository<Kingdom> {
     public void create(Kingdom kingdom) {
         persist(kingdom);
     }
+
 }

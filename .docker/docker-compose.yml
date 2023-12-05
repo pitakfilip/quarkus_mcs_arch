@@ -25,9 +25,9 @@ services:
         environment:
             PGADMIN_DEFAULT_EMAIL: pat@mat.com
             PGADMIN_DEFAULT_PASSWORD: groot
-        depends_on:
-            db:
-                condition: service_started
+#        depends_on:
+#            db:
+#                condition: service_started
 
     consul:
         image: consul:1.15.4
