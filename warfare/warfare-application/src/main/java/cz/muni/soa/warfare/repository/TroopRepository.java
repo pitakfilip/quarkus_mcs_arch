@@ -14,7 +14,13 @@ public class TroopRepository implements ITroopsRepository{
 
     @Inject
     TroopsPanacheRepository troopRepo;
-    @Transactional
+
+    @Override
+    public Troop getById(Long id) {
+        return troopRepo.findById(id);
+    }
+
+
     @Override
     public void persist(Troop t) {
         troopRepo.persist(t);
@@ -23,6 +29,16 @@ public class TroopRepository implements ITroopsRepository{
     @Override
     public List<Troop> getAll() {
         return troopRepo.listAll();
+    }
+
+    @Override
+    public void deleteTroop(Troop t) {
+        troopRepo.delete(t);
+    }
+
+    @Override
+    public void deleteTroopsList(List<Troop> troops) {
+        troops.forEach(this::deleteTroop);
     }
 
 

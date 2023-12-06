@@ -6,18 +6,23 @@ import cz.muni.soa.warfare.domain.Troop;
 import cz.muni.soa.warfare.domain.TroopClass;
 import cz.muni.soa.warfare.repository.IKingdomsTroopsRepository;
 import cz.muni.soa.warfare.repository.ITroopClassLevelRepository;
+import cz.muni.soa.warfare.repository.ITroopsRepository;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class WarfareOperations {
     private final IKingdomsTroopsRepository kTRepo;
 
     private final ITroopClassLevelRepository levelRepo;
 
-    public WarfareOperations(IKingdomsTroopsRepository kTRepo, ITroopClassLevelRepository repository) {
+    private final ITroopsRepository troopRepository;
+
+    public WarfareOperations(IKingdomsTroopsRepository kTRepo, ITroopClassLevelRepository level, ITroopsRepository troopRepository) {
         this.kTRepo = kTRepo;
-        this.levelRepo = repository;
+        this.levelRepo = level;
+        this.troopRepository = troopRepository;
     }
 
     public void levelUpTroopClass(TroopClass tC, Long kingdomId) {
@@ -41,20 +46,23 @@ public class WarfareOperations {
 
     public void addTroopsToKingdom(List<Troop> newTroops, Long kingdomId){
         KingdomsTroops kt = kTRepo.getById(kingdomId);
-        List<Troop> troopList = kt.getTroops();
-        troopList.addAll(newTroops);
+        kt.getTroops().addAll(newTroops);
         kTRepo.persist(kt);
-
     }
 
 
     public List<Troop> getAvailableTroops(Long kingdomId){
-        return null;
+        KingdomsTroops kt = kTRepo.getById(kingdomId);
+        List<Troop> troopList = kt.getTroops();
+        return troopList.stream()
+                .filter(troop -> !troop.isAtWar())
+                .toList();
     }
 
 
-    public void evaluateBattleAftermath(Long kingdomId){
-
+    public void removeFallenTroops(List<Troop> deceasedTroops,Long kingdomId){
+        kTRepo.deleteKingdomsTroopsList(deceasedTroops, kingdomId);
+        troopRepository.deleteTroopsList(deceasedTroops);
     }
 
 

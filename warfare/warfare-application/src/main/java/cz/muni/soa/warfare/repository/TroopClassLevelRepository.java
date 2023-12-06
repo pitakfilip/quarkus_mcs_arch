@@ -15,15 +15,20 @@ public class TroopClassLevelRepository implements ITroopClassLevelRepository{
     TroopClassLevelPanacheRepository repo;
 
     @Override
+    public LevelOfTroopClass getById(Long id) {
+        return repo.findById(id);
+    }
+
+    @Override
     public Map<TroopClass, Integer> getAllTroopClassLevels(Long kingdomId) {
-        LevelOfTroopClass entity = repo.findById(kingdomId);
+        LevelOfTroopClass entity = getById(kingdomId);
         return entity.getTroopLevel();
     }
 
     @Override
     public int getLevelOfTroopClass(TroopClass troopClass, Long kingdomId) {
         LevelOfTroopClass entity = repo.findById(kingdomId);
-        return entity != null ? entity.getTroopLevel().get(troopClass) : null;
+        return entity != null ? entity.getTroopLevel().get(troopClass) : -1;
     }
     @Transactional
     @Override
@@ -38,5 +43,10 @@ public class TroopClassLevelRepository implements ITroopClassLevelRepository{
         int troopClassLevel = mapa.get(troopClass);
         troopClassLevel++;
         mapa.put(troopClass,troopClassLevel);
+    }
+
+    @Override
+    public void deleteClassLevels(Long kingdomId) {
+        repo.delete(repo.findById(kingdomId));
     }
 }

@@ -46,4 +46,5 @@ public class KingdomsTroops {
     public void setTroops(List<Troop> troops) {
         this.troops = troops;
     }
+
 }

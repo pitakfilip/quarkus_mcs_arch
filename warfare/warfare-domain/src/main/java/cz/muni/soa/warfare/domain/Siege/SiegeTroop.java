@@ -6,6 +6,7 @@ import cz.muni.soa.warfare.domain.TroopType;
 public abstract class SiegeTroop extends Troop {
     SiegeTroop(){
         setTroopType(TroopType.SIEGE);
+        setAtWar(false);
     }
 
 }

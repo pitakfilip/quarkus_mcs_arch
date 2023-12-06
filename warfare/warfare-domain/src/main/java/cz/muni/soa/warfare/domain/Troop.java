@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Abstract", discriminatorType = DiscriminatorType.STRING)
+
 public abstract class Troop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -15,7 +16,7 @@ public abstract class Troop {
     private TroopClass troopClass;
     private int level;
 
-    private boolean atWar = false;
+    private boolean atWar;
 
     @Transient
     private int hp;
@@ -97,6 +98,7 @@ public abstract class Troop {
                 ", troopType=" + troopType +
                 ", troopClass=" + troopClass +
                 ", level=" + level +
+                ", atWar=" + atWar +
                 ", hp=" + hp +
                 ", dps=" + dps +
                 ", armor=" + armor +

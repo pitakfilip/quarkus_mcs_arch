@@ -7,6 +7,7 @@ public abstract class MeleeTroop extends Troop {
 
     MeleeTroop() {
         setTroopType(TroopType.MELEE);
+        setAtWar(false);
     }
 
 

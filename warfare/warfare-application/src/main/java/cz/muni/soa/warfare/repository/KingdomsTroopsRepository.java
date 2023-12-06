@@ -30,8 +30,6 @@ public class KingdomsTroopsRepository implements IKingdomsTroopsRepository {
 //        return troopRepo.list("WHERE kingdomid = ?1",kingdomId);
     }
 
-
-
     @Override
     public List<Troop> getAllTroopsOfClass(TroopClass troopClass, Long kingdomId) {
 //        List<Troop> temp = getAllTroops(kingdomId);
@@ -63,7 +61,22 @@ public class KingdomsTroopsRepository implements IKingdomsTroopsRepository {
         troopRepo.persist(kT);
     }
 
+    @Override
+    public void deleteKingdomsTroops(Troop t, Long kingdomId) {
+        KingdomsTroops kT = troopRepo.findById(kingdomId);
+        List<Troop> kTTroops = kT.getTroops();
+        kTTroops.remove(t);
+        kT.setTroops(kTTroops);
 
+    }
+
+    @Override
+    public void deleteKingdomsTroopsList(List<Troop> troops,Long kingdomId) {
+        KingdomsTroops kT = troopRepo.findById(kingdomId);
+        List<Troop> kTTroops = kT.getTroops();
+        kTTroops.removeAll(troops);
+        kT.setTroops(kTTroops);
+    }
 
 
 }

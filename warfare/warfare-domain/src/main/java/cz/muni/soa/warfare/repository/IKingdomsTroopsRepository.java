@@ -16,5 +16,10 @@ public interface IKingdomsTroopsRepository {
     List<Troop> getAllTroopsOfType(TroopType troopType, Long kingdomId);
     void persist(KingdomsTroops kT);
 
+    void deleteKingdomsTroops(Troop t, Long kingdomId);
+
+    void deleteKingdomsTroopsList(List<Troop> troops,Long kingdomId);
+
+
 
 }

@@ -1,4 +1,8 @@
 package cz.muni.soa.warfare.dto;
 
-public class DtoTroopType {
+public enum DtoTroopType {
+        MELEE,
+        RANGED,
+        SIEGE
+
 }

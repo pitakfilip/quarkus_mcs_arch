@@ -18,21 +18,20 @@ import cz.muni.soa.warfare.service.TroopStatCalculator;
 import cz.muni.soa.warfare.service.WarfareOperations;
 import io.quarkus.logging.Log;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Path("/hello")
 public class ExampleResource {
 
     @Inject
-    ITroopsRepository repository;
+    ITroopsRepository troopRepo;
 
     @Inject
     IKingdomsTroopsRepository kTRepo;
@@ -40,26 +39,22 @@ public class ExampleResource {
     ITroopClassLevelRepository levelRepo;
 
 
+    //    @GET
+//    @Produces(MediaType.TEXT_PLAIN)
+//    public void jozkoVajda(List<DtoTroopRequest> requests) {
+//        Map<DtoTroopClass, DtoAvailability> status = new HashMap<>();
+//        for (DtoTroopRequest req: requests) {
+//            // volanie do domain
+//            // boolean isgut = checkAvailability(req.clazz, req.level, req.amount)
+//            // if (isgut) pridat AVAILABLE do mapy
+//            // ak nie tak skontrolovat ci mas money na trening
+//        }
+////        return status;
+//    }
+    @Transactional
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public void jozkoVajda(List<DtoTroopRequest> requests) {
-        Map<DtoTroopClass, DtoAvailability> status = new HashMap<>();
-        for (DtoTroopRequest req: requests) {
-            // volanie do domain
-            // boolean isgut = checkAvailability(req.clazz, req.level, req.amount)
-            // if (isgut) pridat AVAILABLE do mapy
-            // ak nie tak skontrolovat ci mas money na trening
-        }
-//        return status;
-    }
-
-        @GET
-    @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-
-
-
-
 
 
         Troop Calvar = new CalvarySword(1);
@@ -72,75 +67,92 @@ public class ExampleResource {
         Troop Trebuchet = new Trebuchet(1);
 
 
-
-        Map<TroopClass,Integer> map = Map.of(Calvar.getTroopClass(),Calvar.getLevel(), Infantry.getTroopClass(),Infantry.getLevel(),
-                Mace.getTroopClass(),Mace.getLevel(),Archer.getTroopClass(),Archer.getLevel(),Cross.getTroopClass(),Cross.getLevel(),
-                Ram.getTroopClass(),Ram.getLevel(),
-                Trebuchet.getTroopClass(),Trebuchet.getLevel());
+        Map<TroopClass, Integer> map = Map.of(Calvar.getTroopClass(), Calvar.getLevel(), Infantry.getTroopClass(), Infantry.getLevel(),
+                Mace.getTroopClass(), Mace.getLevel(), Archer.getTroopClass(), Archer.getLevel(), Cross.getTroopClass(), Cross.getLevel(),
+                Ram.getTroopClass(), Ram.getLevel(),
+                Trebuchet.getTroopClass(), Trebuchet.getLevel());
 
 
         LevelOfTroopClass lw = new LevelOfTroopClass();
         lw.setKingdomId(1L);
         lw.setTroopLevel(map);
 
-        levelRepo.persist(lw);
+//        levelRepo.persist(lw);
+//
+//
+//
+//        Troop t = new CalvarySword(levelRepo.getLevelOfTroopClass(TroopClass.CALVARYSWORD,1L));
+//        Troop r = new CalvarySword(levelRepo.getLevelOfTroopClass(TroopClass.CALVARYSWORD,1L));
+//        Troop e = new Archer(levelRepo.getLevelOfTroopClass(TroopClass.ARCHER,1L));
+//        Troop w = new MaceMan(levelRepo.getLevelOfTroopClass(TroopClass.MACEMAN,1L));
+//
+//
+//        List<Troop> temp = List.of(t,r,e,w);
+////
+////
+////
+//            repository.persist(t);
+//            repository.persist(r);
+//            repository.persist(e);
+//            repository.persist(w);
+//
+//        List<Troop> list = repository.getAll();
+////
+//        KingdomsTroops k = new KingdomsTroops();
+//        k.setKingdomId(1L);
+//
+//        k.setTroops(temp);
+//
+////        KingdomsTroops l = new KingdomsTroops();
+////        l.setKingdomId(2L);
+////
+//        kTRepo.persist(k);
+////        kTRepo.persist(l);
 
 
+        Troop t = new CalvarySword(1);
+        Troop r = new CalvarySword(1);
+        Troop e = new Archer(1);
+        Troop w = new MaceMan(1);
+        w.setAtWar(true);
+        troopRepo.persist(t);
+        troopRepo.persist(r);
+        troopRepo.persist(e);
+        troopRepo.persist(w);
 
-        Troop t = new CalvarySword(levelRepo.getLevelOfTroopClass(TroopClass.CALVARYSWORD,1L));
-        Troop r = new CalvarySword(levelRepo.getLevelOfTroopClass(TroopClass.CALVARYSWORD,1L));
-        Troop e = new Archer(levelRepo.getLevelOfTroopClass(TroopClass.ARCHER,1L));
-        Troop w = new MaceMan(levelRepo.getLevelOfTroopClass(TroopClass.MACEMAN,1L));
 
-
-        List<Troop> temp = List.of(t,r,e,w);
-        repository.persist(t);
-        repository.persist(r);
-        repository.persist(e);
-        repository.persist(w);
-
-        List<Troop> list = repository.getAll();
-
+        List<Troop> temp = new ArrayList<>(Arrays.asList(t,r,e,w));
         KingdomsTroops k = new KingdomsTroops();
         k.setKingdomId(1L);
 
         k.setTroops(temp);
-
-        KingdomsTroops l = new KingdomsTroops();
-        l.setKingdomId(2L);
-
         kTRepo.persist(k);
-        kTRepo.persist(l);
 
+        Troop R = new RamVehicle(1);
+        Troop T = new Trebuchet(1);
+        List<Troop> add = List.of(R, T);
+        troopRepo.persist(R);
+        troopRepo.persist(T);
+//
+        WarfareOperations wfr = new WarfareOperations(kTRepo, levelRepo, troopRepo);
 
+        wfr.addTroopsToKingdom(add, 1L);
+//
+//
+//        return wfr.getAvailableTroops(1L).toString();
+//            return kTRepo.getAllTroops(1L).toString();
+//
+//
+//            return kTRepo.getAllTroops(1L).toString();
 
+//            return repository.getAll().toString();
 
+//        List<Troop> available = wfr.getAvailableTroops(1L);
 
-        TroopStatCalculator calc = new TroopStatCalculator();
+//        wfr.removeFallenTroops(List.of(t,R),1L);
 
+//        return wfr.getAvailableTroops(1L).toString();
 
-//        return kTRepo.getAllTroops(1L).toString();
-
-
-        Log.info(""+levelRepo.getAllTroopClassLevels(1L));
-        WarfareOperations wfr = new WarfareOperations(kTRepo,levelRepo);
-        wfr.levelUpTroopClass(TroopClass.ARCHER,1L);
-        Log.info(""+levelRepo.getAllTroopClassLevels(1L));
-
-
-        return "penis";
-
-
-
-//        String result = myMap.entrySet().stream()
-//                .map(entry -> entry.getKey() + ": " + entry.getValue())
-//                .collect(Collectors.joining("\n"));
-
-
-
-
-//        return list.stream()
-//                .map(Troop::toString).toList().toString();
-
+        return "onii-chan uWu";
     }
 }
