@@ -3,7 +3,7 @@ package cz.muni.soa.simulation.assembler;
 import cz.muni.soa.simulation.domain.TroopType;
 import cz.muni.soa.simulation.dto.DtoTroopType;
 
-public class TroopStatusAssembler {
+public class TroopTypeAssembler {
     
     public static DtoTroopType toDto(TroopType troopType) {
         return DtoTroopType.values()[troopType.ordinal()];

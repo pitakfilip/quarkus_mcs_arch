@@ -2,6 +2,8 @@ package cz.muni.soa.simulation.assembler;
 
 import cz.muni.soa.kingdom.dto.DtoClassification;
 import cz.muni.soa.kingdom.dto.DtoKingdom;
+import cz.muni.soa.simulation.assembler.TroopTypeAssembler;
+import cz.muni.soa.simulation.assembler.TroopClassAssembler;
 import cz.muni.soa.simulation.dto.DtoTroop;
 import cz.muni.soa.simulation.domain.Troop;
 import cz.muni.soa.simulation.dto.DtoTroop;
@@ -13,7 +15,11 @@ public class TroopAssembler {
     public static DtoTroop toDto(Troop troop) {
         DtoTroop dto = new DtoTroop();
         dto.id = troop.getId();
-        // TODO THE REST (see KingdomDto)
+        dto.troopType = TroopTypeAssembler.toDto(troop.getTroopType());
+        dto.troopClass = TroopClassAssembler.toDto(troop.getTroopClass());
+        dto.hp = troop.getHp();
+        dto.dps = troop.getDps();
+        dto.armor = troop.getArmor();
 
         return dto;
     }
@@ -21,7 +27,12 @@ public class TroopAssembler {
     public static Troop fromDto(DtoTroop dto) {
         Troop troop = new Troop();
         troop.setId(dto.id);
-        // TODO THE REST
+        troop.setTroopType(TroopTypeAssembler.fromDto(dto.troopType));
+        troop.setTroopClass(TroopClassAssembler.fromDto(dto.troopClass));
+        troop.setHp(dto.hp);
+        troop.setOriginalHp(dto.hp);
+        troop.setDps(dto.dps);
+        troop.setArmor(dto.armor);
 
         return troop;
     }
