@@ -8,6 +8,7 @@ import cz.muni.soa.warfare.repository.IKingdomsTroopsRepository;
 import cz.muni.soa.warfare.repository.ITroopClassLevelRepository;
 import cz.muni.soa.warfare.repository.ITroopsRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -44,6 +45,13 @@ public class WarfareOperations {
         levelRepo.persist(lvl);
     }
 
+    public void setupKingdomsTroops(Long kingdomId){
+        KingdomsTroops kT = new KingdomsTroops();
+        kT.setId(kingdomId);
+        kT.setTroops(new ArrayList<>());
+        kTRepo.persist(kT);
+    }
+
     public void addTroopsToKingdom(List<Troop> newTroops, Long kingdomId){
         KingdomsTroops kt = kTRepo.getById(kingdomId);
         kt.getTroops().addAll(newTroops);
@@ -64,6 +72,12 @@ public class WarfareOperations {
         kTRepo.deleteKingdomsTroopsList(deceasedTroops, kingdomId);
         troopRepository.deleteTroopsList(deceasedTroops);
     }
+
+    public void setupCostsOfTroopClasses(){
+
+    }
+
+//    public List<Troop>
 
 
 

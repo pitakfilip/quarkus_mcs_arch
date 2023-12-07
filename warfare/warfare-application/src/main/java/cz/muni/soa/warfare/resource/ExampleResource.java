@@ -1,4 +1,4 @@
-package cz.muni.soa.warfare;
+package cz.muni.soa.warfare.resource;
 
 import cz.muni.soa.warfare.domain.*;
 import cz.muni.soa.warfare.domain.Melee.CalvarySword;

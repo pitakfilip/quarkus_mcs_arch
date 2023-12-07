@@ -8,11 +8,8 @@ import java.util.Map;
 @Entity
 public class KingdomsTroops {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-
-    private Long kingdomId;
 
     @OneToMany
     @JoinTable(
@@ -31,13 +28,6 @@ public class KingdomsTroops {
         return id;
     }
 
-    public Long getKingdomId() {
-        return kingdomId;
-    }
-
-    public void setKingdomId(Long kingdomId) {
-        this.kingdomId = kingdomId;
-    }
 
     public List<Troop> getTroops() {
         return troops;
