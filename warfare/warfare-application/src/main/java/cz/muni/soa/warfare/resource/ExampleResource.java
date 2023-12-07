@@ -123,7 +123,7 @@ public class ExampleResource {
 
         List<Troop> temp = new ArrayList<>(Arrays.asList(t,r,e,w));
         KingdomsTroops k = new KingdomsTroops();
-        k.setKingdomId(1L);
+        k.setId(1L);
 
         k.setTroops(temp);
         kTRepo.persist(k);
