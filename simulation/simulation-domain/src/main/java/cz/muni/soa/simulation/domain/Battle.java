@@ -2,15 +2,34 @@ package cz.muni.soa.simulation.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Battle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private BattleStatus status;
+
     private long attacker;
     private long defender;
-    private BattleStatus status;
+
+    @OneToMany
+    @JoinTable(
+            name="attacker_troops",
+            joinColumns = @JoinColumn(name="id"),
+            inverseJoinColumns = @JoinColumn(name="troop_id")
+    )
+    private List<Troop> attackerTroops;
+
+    @OneToMany
+    @JoinTable(
+            name="defender_troops",
+            joinColumns = @JoinColumn(name="id"),
+            inverseJoinColumns = @JoinColumn(name="troop_id")
+    )
+    private List<Troop> defenderTroops;
 
     public long getId() {
         return id;
@@ -43,4 +62,21 @@ public class Battle {
     public void setStatus(BattleStatus status) {
         this.status = status;
     }
+
+    public List<Troop> getAttackerTroops() {
+        return attackerTroops;
+    }
+
+    public void setAttackerTroops(List<Troop> attackerTroops) {
+        this.attackerTroops = attackerTroops;
+    }
+
+    public List<Troop> getDefenderTroops() {
+        return defenderTroops;
+    }
+
+    public void setDefenderTroops(List<Troop> defenderTroops) {
+        this.defenderTroops = defenderTroops;
+    }
+
 }

@@ -1,14 +1,10 @@
 package cz.muni.soa.simulation.assembler;
 
-import cz.muni.soa.kingdom.dto.DtoClassification;
-import cz.muni.soa.kingdom.dto.DtoKingdom;
-import cz.muni.soa.simulation.assembler.TroopTypeAssembler;
-import cz.muni.soa.simulation.assembler.TroopClassAssembler;
-import cz.muni.soa.simulation.dto.DtoTroop;
 import cz.muni.soa.simulation.domain.Troop;
 import cz.muni.soa.simulation.dto.DtoTroop;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TroopAssembler {
 
@@ -40,12 +36,12 @@ public class TroopAssembler {
     public static List<DtoTroop> toDto (List<Troop> troops) {
         return troops.stream()
                 .map(TroopAssembler::toDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public static List<Troop> fromDto (List<DtoTroop> dtos) {
         return dtos.stream()
                 .map(TroopAssembler::fromDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

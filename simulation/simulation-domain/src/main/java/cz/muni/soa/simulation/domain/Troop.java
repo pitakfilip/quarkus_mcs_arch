@@ -3,6 +3,8 @@ package cz.muni.soa.simulation.domain;
 import jakarta.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "Abstract", discriminatorType = DiscriminatorType.STRING)
 public class Troop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

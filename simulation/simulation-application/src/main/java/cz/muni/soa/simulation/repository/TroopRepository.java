@@ -5,6 +5,8 @@ import cz.muni.soa.simulation.repository.panache.TroopPanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.util.List;
+
 @ApplicationScoped
 public class TroopRepository implements ITroopRepository {
 
@@ -19,5 +21,10 @@ public class TroopRepository implements ITroopRepository {
     @Override
     public void persist(Troop troop) {
         troopRepository.create(troop);
+    }
+
+    @Override
+    public void persist(List<Troop> troopList) {
+        troopRepository.create(troopList);
     }
 }
