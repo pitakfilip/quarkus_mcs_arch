@@ -31,4 +31,11 @@ public interface BattleApi {
     @APIResponse(responseCode = "200")
     @APIResponse(responseCode = "404")
     Response /*DtoBattle*/ getBattle(@PathParam("id") long id);
+
+    @POST
+    @Path("/round/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200")
+    @APIResponse(responseCode = "404")
+    Response /*DtoBattle*/ performCombatRound(@PathParam("id") long id);
 }

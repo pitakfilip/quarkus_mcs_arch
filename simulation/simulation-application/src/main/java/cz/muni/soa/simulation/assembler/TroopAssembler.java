@@ -16,6 +16,7 @@ public class TroopAssembler {
         dto.hp = troop.getHp();
         dto.dps = troop.getDps();
         dto.armor = troop.getArmor();
+        dto.target = troop.getTarget();
 
         return dto;
     }
@@ -29,6 +30,7 @@ public class TroopAssembler {
         troop.setOriginalHp(dto.hp);
         troop.setDps(dto.dps);
         troop.setArmor(dto.armor);
+        troop.setTarget(dto.target);
 
         return troop;
     }

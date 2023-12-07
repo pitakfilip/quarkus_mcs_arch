@@ -17,6 +17,7 @@ public class Troop {
     private int originalHp;
     private int dps;
     private int armor;
+    private int target;
 
     public Long getId() {
         return id;
@@ -73,4 +74,13 @@ public class Troop {
     public void setArmor(int armor) {
         this.armor = armor;
     }
+
+    public int getTarget() {
+        return target;
+    }
+
+    public void setTarget(int target) {
+        this.target = target;
+    }
+
 }

@@ -9,6 +9,8 @@ public class BattleAssembler {
         DtoBattle dto = new DtoBattle();
         dto.id = battle.getId();
         dto.status = BattleStatusAssembler.toDto(battle.getStatus());
+        dto.result = BattleResultAssembler.toDto(battle.getResult());
+        dto.round = battle.getRound();
         dto.attacker = battle.getAttacker();
         dto.defender = battle.getDefender();
         dto.attackerTroops = TroopAssembler.toDto(battle.getAttackerTroops());
@@ -20,6 +22,8 @@ public class BattleAssembler {
         Battle battle = new Battle();
         battle.setId(dto.id);
         battle.setStatus(BattleStatusAssembler.fromDto(dto.status));
+        battle.setResult(BattleResultAssembler.fromDto(dto.result));
+        battle.setRound(dto.round);
         battle.setAttacker(dto.attacker);
         battle.setDefender(dto.defender);
         battle.setAttackerTroops(TroopAssembler.fromDto(dto.attackerTroops));

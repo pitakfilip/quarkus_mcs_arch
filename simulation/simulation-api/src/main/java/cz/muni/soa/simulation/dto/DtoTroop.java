@@ -8,4 +8,5 @@ public class DtoTroop {
     public int hp;
     public int dps;
     public int armor;
+    public int target;
 }

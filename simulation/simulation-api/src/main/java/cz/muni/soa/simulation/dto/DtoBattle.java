@@ -6,6 +6,8 @@ public class DtoBattle {
     public long id;
 
     public DtoBattleStatus status;
+    public DtoBattleResult result;
+    public long round;
 
     public long attacker;
     public long defender;

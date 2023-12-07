@@ -2,6 +2,7 @@ package cz.muni.soa.simulation.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -11,6 +12,8 @@ public class Battle {
     private long id;
 
     private BattleStatus status;
+    private BattleResult result;
+    private long round;
 
     private long attacker;
     private long defender;
@@ -39,6 +42,30 @@ public class Battle {
         this.id = id;
     }
 
+    public BattleStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BattleStatus status) {
+        this.status = status;
+    }
+
+    public BattleResult getResult() {
+        return result;
+    }
+
+    public void setResult(BattleResult result) {
+        this.result = result;
+    }
+
+    public long getRound() {
+        return round;
+    }
+
+    public void setRound(long round) {
+        this.round = round;
+    }
+
     public long getAttacker() {
         return attacker;
     }
@@ -55,15 +82,9 @@ public class Battle {
         this.defender = defender;
     }
 
-    public BattleStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(BattleStatus status) {
-        this.status = status;
-    }
-
     public List<Troop> getAttackerTroops() {
+        // keep a stable order for evaluation of battles
+        attackerTroops.sort(Comparator.comparing(Troop::getId));
         return attackerTroops;
     }
 
@@ -72,6 +93,7 @@ public class Battle {
     }
 
     public List<Troop> getDefenderTroops() {
+        defenderTroops.sort(Comparator.comparing(Troop::getId));
         return defenderTroops;
     }
 
