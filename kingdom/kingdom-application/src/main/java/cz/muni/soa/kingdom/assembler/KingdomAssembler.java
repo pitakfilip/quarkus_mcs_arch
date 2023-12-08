@@ -25,8 +25,7 @@ public class KingdomAssembler {
     }
     
     public static Kingdom fromDto (DtoKingdom dto) {
-        Kingdom k = new Kingdom(dto.name);
-        k.setId(dto.id);
+        Kingdom k = new Kingdom(dto.id, dto.name);
         k.setProgress(ProgressAssembler.fromDto(dto.progress));
         
         return k;

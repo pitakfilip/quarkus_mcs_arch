@@ -27,10 +27,9 @@
             <groupId>cz.muni.soa.warfare</groupId>
             <artifactId>warfare-domain</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>cz.muni.soa.kingdom</groupId>
-            <artifactId>kingdom-api</artifactId>
+            <groupId>cz.muni.soa.infrastructure</groupId>
+            <artifactId>infrastructure-application</artifactId>
         </dependency>
 
         <dependency>

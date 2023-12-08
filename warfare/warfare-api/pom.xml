@@ -19,10 +19,6 @@
     
     <dependencies>
         <dependency>
-            <groupId>cz.muni.soa.infrastructure</groupId>
-            <artifactId>infrastructure-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-openapi</artifactId>
         </dependency>

@@ -1,22 +1,20 @@
 package cz.muni.soa.warfare.resource;
 
 import cz.muni.soa.warfare.domain.*;
-import cz.muni.soa.warfare.domain.Melee.CalvarySword;
-import cz.muni.soa.warfare.domain.Melee.InfantrySword;
-import cz.muni.soa.warfare.domain.Melee.MaceMan;
-import cz.muni.soa.warfare.domain.Ranged.Archer;
-import cz.muni.soa.warfare.domain.Ranged.CrossBowTroop;
-import cz.muni.soa.warfare.domain.Siege.RamVehicle;
-import cz.muni.soa.warfare.domain.Siege.Trebuchet;
-import cz.muni.soa.warfare.dto.DtoAvailability;
-import cz.muni.soa.warfare.dto.DtoTroopClass;
-import cz.muni.soa.warfare.dto.DtoTroopRequest;
+import cz.muni.soa.warfare.domain.troop.TroopClassLevel;
+import cz.muni.soa.warfare.domain.troop.melee.CalvarySword;
+import cz.muni.soa.warfare.domain.troop.melee.InfantrySword;
+import cz.muni.soa.warfare.domain.troop.melee.MaceMan;
+import cz.muni.soa.warfare.domain.troop.ranged.Archer;
+import cz.muni.soa.warfare.domain.troop.ranged.CrossBowTroop;
+import cz.muni.soa.warfare.domain.troop.siege.RamVehicle;
+import cz.muni.soa.warfare.domain.troop.siege.Trebuchet;
+import cz.muni.soa.warfare.domain.troop.Troop;
+import cz.muni.soa.warfare.domain.troop.TroopClass;
 import cz.muni.soa.warfare.repository.IKingdomsTroopsRepository;
 import cz.muni.soa.warfare.repository.ITroopClassLevelRepository;
 import cz.muni.soa.warfare.repository.ITroopsRepository;
-import cz.muni.soa.warfare.service.TroopStatCalculator;
 import cz.muni.soa.warfare.service.WarfareOperations;
-import io.quarkus.logging.Log;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
@@ -25,18 +23,17 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Path("/hello")
 public class ExampleResource {
 
     @Inject
-    ITroopsRepository troopRepo;
+    ITroopsRepository troopsRepository;
 
     @Inject
-    IKingdomsTroopsRepository kTRepo;
+    IKingdomsTroopsRepository kingdomsTroopsRepository;
     @Inject
-    ITroopClassLevelRepository levelRepo;
+    ITroopClassLevelRepository levelRepository;
 
 
     //    @GET
@@ -73,7 +70,7 @@ public class ExampleResource {
                 Trebuchet.getTroopClass(), Trebuchet.getLevel());
 
 
-        LevelOfTroopClass lw = new LevelOfTroopClass();
+        TroopClassLevel lw = new TroopClassLevel();
         lw.setKingdomId(1L);
         lw.setTroopLevel(map);
 
@@ -115,10 +112,10 @@ public class ExampleResource {
         Troop e = new Archer(1);
         Troop w = new MaceMan(1);
         w.setAtWar(true);
-        troopRepo.persist(t);
-        troopRepo.persist(r);
-        troopRepo.persist(e);
-        troopRepo.persist(w);
+        troopsRepository.persist(t);
+        troopsRepository.persist(r);
+        troopsRepository.persist(e);
+        troopsRepository.persist(w);
 
 
         List<Troop> temp = new ArrayList<>(Arrays.asList(t,r,e,w));
@@ -126,15 +123,15 @@ public class ExampleResource {
         k.setId(1L);
 
         k.setTroops(temp);
-        kTRepo.persist(k);
+        kingdomsTroopsRepository.persist(k);
 
         Troop R = new RamVehicle(1);
         Troop T = new Trebuchet(1);
         List<Troop> add = List.of(R, T);
-        troopRepo.persist(R);
-        troopRepo.persist(T);
+        troopsRepository.persist(R);
+        troopsRepository.persist(T);
 //
-        WarfareOperations wfr = new WarfareOperations(kTRepo, levelRepo, troopRepo);
+        WarfareOperations wfr = new WarfareOperations(kingdomsTroopsRepository, levelRepository, troopsRepository);
 
         wfr.addTroopsToKingdom(add, 1L);
 //

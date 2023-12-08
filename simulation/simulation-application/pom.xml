@@ -27,7 +27,10 @@
             <groupId>cz.muni.soa.simulation</groupId>
             <artifactId>simulation-domain</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>cz.muni.soa.infrastructure</groupId>
+            <artifactId>infrastructure-application</artifactId>
+        </dependency>
         <dependency>
             <groupId>cz.muni.soa.kingdom</groupId>
             <artifactId>kingdom-api</artifactId>

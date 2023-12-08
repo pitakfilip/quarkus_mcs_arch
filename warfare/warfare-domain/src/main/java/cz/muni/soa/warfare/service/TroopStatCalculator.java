@@ -1,7 +1,6 @@
 package cz.muni.soa.warfare.service;
 
-import cz.muni.soa.warfare.domain.Troop;
-import cz.muni.soa.warfare.repository.IKingdomsTroopsRepository;
+import cz.muni.soa.warfare.domain.troop.Troop;
 
 import java.util.List;
 

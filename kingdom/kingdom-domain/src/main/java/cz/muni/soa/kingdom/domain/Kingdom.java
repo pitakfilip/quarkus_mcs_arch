@@ -24,6 +24,12 @@ public class Kingdom {
         this.progress = new Progress();
     }
 
+    public Kingdom(Long id, String name) {
+        this.id = id;
+        this.name = name;
+        this.progress = new Progress();
+    }
+
     /**
      * @return Current kingdom classification based on progress.
      */

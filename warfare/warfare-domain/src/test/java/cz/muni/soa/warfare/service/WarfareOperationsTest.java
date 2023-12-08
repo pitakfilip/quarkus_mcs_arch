@@ -1,22 +1,13 @@
 package cz.muni.soa.warfare.service;
 
-import cz.muni.soa.warfare.domain.KingdomsTroops;
-import cz.muni.soa.warfare.domain.Melee.CalvarySword;
-import cz.muni.soa.warfare.domain.Melee.MaceMan;
-import cz.muni.soa.warfare.domain.Ranged.Archer;
-import cz.muni.soa.warfare.domain.Siege.RamVehicle;
-import cz.muni.soa.warfare.domain.Siege.Trebuchet;
-import cz.muni.soa.warfare.domain.Troop;
-import cz.muni.soa.warfare.domain.TroopClass;
+import cz.muni.soa.warfare.domain.troop.TroopClass;
 import cz.muni.soa.warfare.repository.IKingdomsTroopsRepository;
 import cz.muni.soa.warfare.repository.ITroopClassLevelRepository;
 import cz.muni.soa.warfare.repository.ITroopsRepository;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

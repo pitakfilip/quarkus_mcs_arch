@@ -1,9 +1,9 @@
 package cz.muni.soa.warfare.repository;
 
 import cz.muni.soa.warfare.domain.KingdomsTroops;
-import cz.muni.soa.warfare.domain.Troop;
-import cz.muni.soa.warfare.domain.TroopClass;
-import cz.muni.soa.warfare.domain.TroopType;
+import cz.muni.soa.warfare.domain.troop.Troop;
+import cz.muni.soa.warfare.domain.troop.TroopClass;
+import cz.muni.soa.warfare.domain.troop.TroopType;
 import cz.muni.soa.warfare.repository.panache.KingdomsTroopPanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -46,36 +46,32 @@ public class KingdomsTroopsRepository implements IKingdomsTroopsRepository {
 
     @Override
     public List<Troop> getAllTroopsOfType(TroopType troopType, Long kingdomId) {
-//        List<Troop> temp = getAllTroops(kingdomId);
-//        return temp.stream()
-//                .filter(troop -> troop.getTroopType().equals(troopType))
-//                .collect(Collectors.toList());
-//        return troopRepo.list("trooptype", troopType);
-        KingdomsTroops kT = getById(kingdomId);
-        return kT.getTroops().stream().filter(troop ->
+        KingdomsTroops kingdomsTroops = getById(kingdomId);
+        return kingdomsTroops.getTroops().stream().filter(troop ->
                 troop.getTroopType().equals(troopType)).collect(Collectors.toList());
     }
+
     @Transactional
     @Override
-    public void persist(KingdomsTroops kT) {
-        troopRepo.persist(kT);
+    public void persist(KingdomsTroops kingdomsTroops) {
+        troopRepo.persist(kingdomsTroops);
     }
 
     @Override
-    public void deleteKingdomsTroops(Troop t, Long kingdomId) {
-        KingdomsTroops kT = troopRepo.findById(kingdomId);
-        List<Troop> kTTroops = kT.getTroops();
-        kTTroops.remove(t);
-        kT.setTroops(kTTroops);
+    public void deleteKingdomsTroops(Troop troop, Long kingdomId) {
+        KingdomsTroops kingdomsTroops = troopRepo.findById(kingdomId);
+        List<Troop> troops = kingdomsTroops.getTroops();
+        troops.remove(troop);
+        kingdomsTroops.setTroops(troops);
 
     }
 
     @Override
-    public void deleteKingdomsTroopsList(List<Troop> troops,Long kingdomId) {
-        KingdomsTroops kT = troopRepo.findById(kingdomId);
-        List<Troop> kTTroops = kT.getTroops();
-        kTTroops.removeAll(troops);
-        kT.setTroops(kTTroops);
+    public void deleteKingdomsTroopsList(List<Troop> forRemoval, Long kingdomId) {
+        KingdomsTroops kingdomsTroops = troopRepo.findById(kingdomId);
+        List<Troop> troops = kingdomsTroops.getTroops();
+        troops.removeAll(forRemoval);
+        kingdomsTroops.setTroops(troops);
     }
 
 

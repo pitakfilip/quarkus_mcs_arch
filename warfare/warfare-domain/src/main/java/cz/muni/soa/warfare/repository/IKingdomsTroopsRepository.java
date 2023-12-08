@@ -1,9 +1,9 @@
 package cz.muni.soa.warfare.repository;
 
 import cz.muni.soa.warfare.domain.KingdomsTroops;
-import cz.muni.soa.warfare.domain.Troop;
-import cz.muni.soa.warfare.domain.TroopClass;
-import cz.muni.soa.warfare.domain.TroopType;
+import cz.muni.soa.warfare.domain.troop.Troop;
+import cz.muni.soa.warfare.domain.troop.TroopClass;
+import cz.muni.soa.warfare.domain.troop.TroopType;
 
 import java.util.List;
 

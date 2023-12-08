@@ -44,7 +44,6 @@
                 <artifactId>simulation-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>cz.muni.soa.kingdom</groupId>
                 <artifactId>kingdom-api</artifactId>
@@ -59,11 +58,6 @@
                 <groupId>cz.muni.soa.warfare</groupId>
                 <artifactId>warfare-api</artifactId>
                 <version>${warfare.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cz.muni.soa.infrastructure</groupId>
-                <artifactId>infrastructure-api</artifactId>
-                <version>${infrastructure.version}</version>
             </dependency>
             <dependency>
                 <groupId>cz.muni.soa.infrastructure</groupId>

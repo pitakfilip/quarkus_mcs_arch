@@ -26,6 +26,10 @@
             <groupId>cz.muni.soa.kingdom</groupId>
             <artifactId>kingdom-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cz.muni.soa.infrastructure</groupId>
+            <artifactId>infrastructure-application</artifactId>
+        </dependency>
         
         <dependency>
             <groupId>io.quarkus</groupId>

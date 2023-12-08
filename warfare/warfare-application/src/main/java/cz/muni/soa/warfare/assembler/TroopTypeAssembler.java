@@ -1,8 +1,6 @@
 package cz.muni.soa.warfare.assembler;
 
-import cz.muni.soa.warfare.domain.TroopClass;
-import cz.muni.soa.warfare.domain.TroopType;
-import cz.muni.soa.warfare.dto.DtoTroopClass;
+import cz.muni.soa.warfare.domain.troop.TroopType;
 import cz.muni.soa.warfare.dto.DtoTroopType;
 
 public class TroopTypeAssembler {
@@ -14,6 +12,5 @@ public class TroopTypeAssembler {
     public static TroopType fromDto(DtoTroopType dto) {
         return TroopType.values()[dto.ordinal()];
     }
-
 
 }

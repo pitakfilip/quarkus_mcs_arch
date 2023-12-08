@@ -46,11 +46,6 @@
             
             <dependency>
                 <groupId>cz.muni.soa.infrastructure</groupId>
-                <artifactId>infrastructure-api</artifactId>
-                <version>${infrastructure.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cz.muni.soa.infrastructure</groupId>
                 <artifactId>infrastructure-application</artifactId>
                 <version>${infrastructure.version}</version>
             </dependency>

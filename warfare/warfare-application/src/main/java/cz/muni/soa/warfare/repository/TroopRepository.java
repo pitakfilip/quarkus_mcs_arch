@@ -1,11 +1,9 @@
 package cz.muni.soa.warfare.repository;
 
-import cz.muni.soa.warfare.domain.Troop;
-import cz.muni.soa.warfare.repository.panache.KingdomsTroopPanacheRepository;
+import cz.muni.soa.warfare.domain.troop.Troop;
 import cz.muni.soa.warfare.repository.panache.TroopsPanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 
 import java.util.List;
 

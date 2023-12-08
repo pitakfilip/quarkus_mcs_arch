@@ -1,9 +1,9 @@
 package cz.muni.soa.warfare.service;
 
 import cz.muni.soa.warfare.domain.KingdomsTroops;
-import cz.muni.soa.warfare.domain.LevelOfTroopClass;
-import cz.muni.soa.warfare.domain.Troop;
-import cz.muni.soa.warfare.domain.TroopClass;
+import cz.muni.soa.warfare.domain.troop.TroopClassLevel;
+import cz.muni.soa.warfare.domain.troop.Troop;
+import cz.muni.soa.warfare.domain.troop.TroopClass;
 import cz.muni.soa.warfare.repository.IKingdomsTroopsRepository;
 import cz.muni.soa.warfare.repository.ITroopClassLevelRepository;
 import cz.muni.soa.warfare.repository.ITroopsRepository;
@@ -11,7 +11,6 @@ import cz.muni.soa.warfare.repository.ITroopsRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class WarfareOperations {
     private final IKingdomsTroopsRepository kTRepo;
@@ -39,7 +38,7 @@ public class WarfareOperations {
                 TroopClass.RAM_VEHICLE, 1,
                 TroopClass.TREBUCHET, 1);
 
-        LevelOfTroopClass lvl = new LevelOfTroopClass();
+        TroopClassLevel lvl = new TroopClassLevel();
         lvl.setKingdomId(kingdomId);
         lvl.setTroopLevel(map);
         levelRepo.persist(lvl);

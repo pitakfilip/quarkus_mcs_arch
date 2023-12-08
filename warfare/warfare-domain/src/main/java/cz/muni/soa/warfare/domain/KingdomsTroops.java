@@ -1,9 +1,9 @@
 package cz.muni.soa.warfare.domain;
 
+import cz.muni.soa.warfare.domain.troop.Troop;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Entity
 public class KingdomsTroops {

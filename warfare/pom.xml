@@ -24,7 +24,6 @@
 
         <!--   DOMAIN     -->
         <infrastructure.version>1.0-SNAPSHOT</infrastructure.version>
-        <kingdom.version>1.0-SNAPSHOT</kingdom.version>
         <foundation.version>1.0-SNAPSHOT</foundation.version>
         <!--   TECH     -->
         <quarkus.platform.version>3.6.0</quarkus.platform.version>
@@ -43,21 +42,10 @@
                 <artifactId>warfare-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>cz.muni.soa.kingdom</groupId>
-                <artifactId>kingdom-api</artifactId>
-                <version>${kingdom.version}</version>
-            </dependency>
             <dependency>
                 <groupId>cz.muni.soa.foundation</groupId>
                 <artifactId>foundation-api</artifactId>
                 <version>${foundation.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cz.muni.soa.infrastructure</groupId>
-                <artifactId>infrastructure-api</artifactId>
-                <version>${infrastructure.version}</version>
             </dependency>
             <dependency>
                 <groupId>cz.muni.soa.infrastructure</groupId>
