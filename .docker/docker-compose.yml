@@ -30,15 +30,14 @@ services:
 #                condition: service_started
 
     consul:
-        image: consul:1.15.4
+        image: consul:1.15
 
         ports:
-            - published: 8500
-              target: 8500
-
-        environment:
-            CONSUL_BIND_INTERFACE: eth0
-
+            - "8500:8500"
+            - "8600:8600/udp"
+        
+        command: "agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0"
+    
     consul-kv-init:
         image: bitsofinfo/files-to-consul-kv:1.0.6
 

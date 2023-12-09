@@ -3,6 +3,7 @@ package cz.muni.soa.kingdom.resource;
 import cz.muni.soa.infrastructure.security.AuthContext;
 import cz.muni.soa.kingdom.api.KingdomApi;
 import cz.muni.soa.kingdom.assembler.KingdomAssembler;
+import cz.muni.soa.kingdom.proxy.WarfareProxy;
 import cz.muni.soa.kingdom.service.KingdomOperations;
 import cz.muni.soa.kingdom.dto.DtoKingdom;
 
@@ -13,6 +14,7 @@ import jakarta.ws.rs.Path;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @Path("/kingdom")
 @SecurityScheme(securitySchemeName = "JWT",
