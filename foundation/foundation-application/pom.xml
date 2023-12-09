@@ -27,6 +27,10 @@
             <groupId>cz.muni.soa.foundation</groupId>
             <artifactId>foundation-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cz.muni.soa.infrastructure</groupId>
+            <artifactId>infrastructure-application</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>io.quarkus</groupId>
