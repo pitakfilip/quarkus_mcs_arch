@@ -33,7 +33,7 @@ public interface TroopApi {
     )
      Response addTroops(@RequestBody  List<DtoTroop> troops);
 
-    @POST
+    @GET
     @Path("/levelUp")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

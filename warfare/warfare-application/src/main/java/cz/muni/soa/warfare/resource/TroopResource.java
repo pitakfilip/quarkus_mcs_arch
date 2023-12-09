@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
-@Path("/publictroops")
+@Path("/troops")
 public class TroopResource implements TroopApi {
     @Inject
     WarfareService service;
