@@ -3,6 +3,7 @@ package cz.muni.soa.warfare.resource;
 import cz.muni.soa.warfare.api.TroopApi;
 import cz.muni.soa.warfare.assembler.TroopAssembler;
 import cz.muni.soa.warfare.domain.troop.TroopClass;
+import cz.muni.soa.warfare.dto.DtoKingdomTroopLevel;
 import cz.muni.soa.warfare.dto.DtoTroop;
 import cz.muni.soa.warfare.dto.DtoTroopClass;
 import cz.muni.soa.warfare.dto.DtoTroopType;
@@ -35,10 +36,11 @@ public class TroopResource implements TroopApi {
     }
 
     @Override
-    public Response levelUpClass(DtoTroopClass tC) {
-        service.levelUpClass(tC);
+    public Response levelUpClass(String troopClass) {
+        DtoTroopClass clazz = DtoTroopClass.valueOf(troopClass);
+        service.levelUpClass(clazz);
+
         return Response.ok().build();
     }
-
 
 }

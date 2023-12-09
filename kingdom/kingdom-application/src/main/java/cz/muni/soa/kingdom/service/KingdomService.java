@@ -16,6 +16,7 @@ public class KingdomService {
     IKingdomRepository kingdomRepository;
 
     @RestClient
+                
     WarfareProxy warfareApi;
 
     @Transactional
