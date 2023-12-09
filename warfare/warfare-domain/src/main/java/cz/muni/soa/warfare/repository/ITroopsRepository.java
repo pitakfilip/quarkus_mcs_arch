@@ -19,5 +19,4 @@ public interface ITroopsRepository {
 
     void deleteTroopsList(List<Troop> troops);
 
-    void updateToWar(List<Long> ids);
 }

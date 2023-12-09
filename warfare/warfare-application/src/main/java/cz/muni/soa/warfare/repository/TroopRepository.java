@@ -55,11 +55,6 @@ public class TroopRepository implements ITroopsRepository{
         troops.forEach(this::deleteTroop);
     }
 
-    @Override
-    public void updateToWar(List<Long> ids) {
-        String jpqlUpdate = "UPDATE Troop SET atWar = true WHERE id IN (?1)";
-        troopRepo.update(jpqlUpdate, ids.toArray());
-    }
 
 
 }
