@@ -46,5 +46,21 @@ public class TroopStatCalculator {
         return armor + (level -1) * (int)((armor) * 0.3);
     }
 
+    public static int getBasicHp(int currentHp, int level) {
+        return currentHp - (level - 1) * (int) (currentHp * 0.5);
+    }
+
+    public static int getBasicDPS(int currentDPS, int level) {
+        return currentDPS - (level - 1) * (int) (currentDPS * 0.4);
+    }
+
+    public static int getBasicArmor(int currentArmor, int level) {
+        if (currentArmor == 0) currentArmor = 5;
+        return currentArmor - (level - 1) * (int) (currentArmor * 0.3);
+    }
+
+
+
+
 
 }

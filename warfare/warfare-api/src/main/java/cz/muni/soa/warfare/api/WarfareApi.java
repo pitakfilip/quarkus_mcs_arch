@@ -11,7 +11,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 public interface WarfareApi {
     
     @POST
-    @Path("/initLevels")
+    @Path("/initTroops")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "")
     @APIResponse(
@@ -19,5 +19,15 @@ public interface WarfareApi {
             description = ""
     )
     Response initKingdomTroops();
+
+    @POST
+    @Path("/mockTroops")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "")
+    @APIResponse(
+            responseCode = "200",
+            description = ""
+    )
+    Response mockInit();
 
 }

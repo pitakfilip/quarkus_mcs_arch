@@ -4,11 +4,19 @@ import cz.muni.soa.warfare.domain.KingdomsTroops;
 import cz.muni.soa.warfare.domain.troop.TroopClassLevel;
 import cz.muni.soa.warfare.domain.troop.Troop;
 import cz.muni.soa.warfare.domain.troop.TroopClass;
+import cz.muni.soa.warfare.domain.troop.melee.CalvarySword;
+import cz.muni.soa.warfare.domain.troop.melee.InfantrySword;
+import cz.muni.soa.warfare.domain.troop.melee.MaceMan;
+import cz.muni.soa.warfare.domain.troop.ranged.Archer;
+import cz.muni.soa.warfare.domain.troop.ranged.CrossBowTroop;
+import cz.muni.soa.warfare.domain.troop.siege.RamVehicle;
+import cz.muni.soa.warfare.domain.troop.siege.Trebuchet;
 import cz.muni.soa.warfare.repository.IKingdomsTroopsRepository;
 import cz.muni.soa.warfare.repository.ITroopClassLevelRepository;
 import cz.muni.soa.warfare.repository.ITroopsRepository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +33,15 @@ public class WarfareOperations {
         this.troopRepository = troopRepository;
     }
 
-    public void levelUpTroopClass(TroopClass tC, Long kingdomId) {
-        levelRepo.levelUpTroopClass(tC, kingdomId);
-    }
+    public void levelUpTroopClass(TroopClass tC,Long kingdomId) {
+            TroopClassLevel entity = levelRepo.getById(kingdomId);
+            var mapa = entity.getTroopLevel();
+            int troopClassLevel = mapa.get(tC);
+            troopClassLevel++;
+            mapa.put(tC, troopClassLevel);
+            levelRepo.persist(entity);
+        }
+
 
     public void setUpLevelsForNewKingdom(Long kingdomId) {
         Map<TroopClass, Integer> map = Map.of(TroopClass.CALVARYSWORD, 1,
@@ -52,6 +66,7 @@ public class WarfareOperations {
     }
 
     public void addTroopsToKingdom(List<Troop> newTroops, Long kingdomId){
+        troopRepository.persist(newTroops);
         KingdomsTroops kt = kTRepo.getById(kingdomId);
         kt.getTroops().addAll(newTroops);
         kTRepo.persist(kt);
@@ -64,6 +79,21 @@ public class WarfareOperations {
         return troopList.stream()
                 .filter(troop -> !troop.isAtWar())
                 .toList();
+    }
+
+
+    public List<Troop> initMockTroops(){
+
+        Troop Calvar = new CalvarySword(1);
+        Troop Infantry = new InfantrySword(1);
+        Troop Mace = new MaceMan(1);
+        Troop Archer = new Archer(1);
+
+        Troop Cross = new CrossBowTroop(1);
+        Troop Ram = new RamVehicle(1);
+        Troop Trebuchet = new Trebuchet(1);
+        return new ArrayList<>(Arrays.asList(Calvar,Infantry,Mace,Archer,Cross,Ram,Trebuchet));
+
     }
 
 

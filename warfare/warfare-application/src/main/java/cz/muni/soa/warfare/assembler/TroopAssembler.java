@@ -31,7 +31,7 @@ public class TroopAssembler {
     public static Troop fromDto(DtoTroop dto) {
         Troop troop = TroopFactory.create(TroopClassAssembler.fromDto(dto.troopClass));
         troop.setId(dto.id);
-        // TODO init other properties
+        troop.setLevel(dto.level);
         return troop;
     }
     

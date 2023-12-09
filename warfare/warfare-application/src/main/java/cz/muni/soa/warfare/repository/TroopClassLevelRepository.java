@@ -39,14 +39,7 @@ public class TroopClassLevelRepository implements ITroopClassLevelRepository {
         repo.persist(classLevel);
     }
 
-    @Override
-    public void levelUpTroopClass(TroopClass troopClass, Long kingdomId) {
-        TroopClassLevel entity = repo.findById(kingdomId);
-        var mapa = entity.getTroopLevel();
-        int troopClassLevel = mapa.get(troopClass);
-        troopClassLevel++;
-        mapa.put(troopClass, troopClassLevel);
-    }
+
 
     @Override
     public void deleteClassLevels(Long kingdomId) {

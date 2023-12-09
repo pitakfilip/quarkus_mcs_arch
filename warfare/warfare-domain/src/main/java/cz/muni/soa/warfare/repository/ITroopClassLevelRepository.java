@@ -14,7 +14,6 @@ public interface ITroopClassLevelRepository {
 
     void persist(TroopClassLevel l);
 
-    void levelUpTroopClass(TroopClass troopClass, Long kingdomId);
 
     void deleteClassLevels(Long kingdomId);
 

@@ -1,9 +1,12 @@
 package cz.muni.soa.warfare.service;
 
 import cz.muni.soa.warfare.domain.troop.TroopClass;
+import cz.muni.soa.warfare.domain.troop.siege.Trebuchet;
 import cz.muni.soa.warfare.repository.IKingdomsTroopsRepository;
 import cz.muni.soa.warfare.repository.ITroopClassLevelRepository;
 import cz.muni.soa.warfare.repository.ITroopsRepository;
+import cz.muni.soa.warfare.repository.Troopklas;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Map;
@@ -30,6 +33,21 @@ public class WarfareOperationsTest {
                 TroopClass.TREBUCHET, 1);
 
         when(classLevel.getAllTroopClassLevels(1L)).thenReturn(comparingMapa);
+    }
+    public static TroopClass fromDto(Troopklas dto) {
+        return TroopClass.values()[dto.ordinal()];
+    }
+    @Test
+    public void kokot(){
+        TroopClass t = TroopClass.TREBUCHET;
+        Troopklas d = Troopklas.TREBUCHET;
+
+        String a = t.toString();
+        String b = d.toString();
+
+        Assert.assertEquals(a, b);
+
+
     }
 
 //    @Test

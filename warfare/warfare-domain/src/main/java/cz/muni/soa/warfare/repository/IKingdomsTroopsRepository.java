@@ -21,5 +21,4 @@ public interface IKingdomsTroopsRepository {
     void deleteKingdomsTroopsList(List<Troop> troops,Long kingdomId);
 
 
-
 }

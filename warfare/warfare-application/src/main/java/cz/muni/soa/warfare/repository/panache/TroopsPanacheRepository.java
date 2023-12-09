@@ -6,4 +6,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class TroopsPanacheRepository implements PanacheRepository<Troop> {
+
+
 }
