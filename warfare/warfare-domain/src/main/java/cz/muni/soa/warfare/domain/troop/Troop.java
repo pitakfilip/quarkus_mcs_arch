@@ -29,6 +29,9 @@ public abstract class Troop {
     @Transient
     private int armor;
 
+    @Transient
+    private int cost;
+
 
     public void setId(Long id) {
         this.id = id;
@@ -92,6 +95,14 @@ public abstract class Troop {
 
     public void setAtWar(boolean atWar) {
         this.atWar = atWar;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     @Override

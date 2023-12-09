@@ -14,6 +14,7 @@ public class CrossBowTroop extends RangedTroop {
         setDps(20);
         setArmor(0);
         setHp(35);
+        setCost(35);
     }
 
     public CrossBowTroop() {
@@ -22,5 +23,6 @@ public class CrossBowTroop extends RangedTroop {
         setDps(20);
         setArmor(0);
         setHp(35);
+        setCost(35);
     }
 }

@@ -21,11 +21,4 @@ public class WarfareResource implements WarfareApi {
         Log.info("" + service.getAvailableTroops());
         return Response.ok().build();
     }
-
-    @Override
-    public Response mockInit() {
-        return null;
-    }
-
-
 }

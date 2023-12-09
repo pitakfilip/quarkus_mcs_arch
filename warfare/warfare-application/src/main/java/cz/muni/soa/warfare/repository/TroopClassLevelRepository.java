@@ -33,7 +33,6 @@ public class TroopClassLevelRepository implements ITroopClassLevelRepository {
         return entity != null ? entity.getTroopLevel().get(troopClass) : -1;
     }
 
-    @Transactional
     @Override
     public void persist(TroopClassLevel classLevel) {
         repo.persist(classLevel);

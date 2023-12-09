@@ -37,4 +37,6 @@ public class KingdomsTroops {
         this.troops = troops;
     }
 
+
+
 }

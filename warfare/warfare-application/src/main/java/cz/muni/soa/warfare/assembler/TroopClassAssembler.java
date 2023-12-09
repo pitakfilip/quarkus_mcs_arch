@@ -6,7 +6,7 @@ import cz.muni.soa.warfare.dto.DtoTroopClass;
 public class TroopClassAssembler {
     
     public static DtoTroopClass toDto(TroopClass status) {
-        return DtoTroopClass.values()[status.ordinal()];
+        return DtoTroopClass.valueOf(status.name());
     }
 
     public static TroopClass fromDto(DtoTroopClass dto) {

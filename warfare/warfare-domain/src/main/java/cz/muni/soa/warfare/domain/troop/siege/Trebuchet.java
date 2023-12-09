@@ -14,6 +14,7 @@ public class Trebuchet extends SiegeTroop {
         setDps(50);
         setArmor(20);
         setHp(120);
+        setCost(250);
     }
 
     public Trebuchet() {
@@ -22,5 +23,6 @@ public class Trebuchet extends SiegeTroop {
         setDps(50);
         setArmor(20);
         setHp(120);
+        setCost(250);
     }
 }

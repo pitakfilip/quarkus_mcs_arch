@@ -1,9 +1,7 @@
 package cz.muni.soa.warfare.service;
 
 import cz.muni.soa.warfare.domain.KingdomsTroops;
-import cz.muni.soa.warfare.domain.troop.TroopClassLevel;
-import cz.muni.soa.warfare.domain.troop.Troop;
-import cz.muni.soa.warfare.domain.troop.TroopClass;
+import cz.muni.soa.warfare.domain.troop.*;
 import cz.muni.soa.warfare.domain.troop.melee.CalvarySword;
 import cz.muni.soa.warfare.domain.troop.melee.InfantrySword;
 import cz.muni.soa.warfare.domain.troop.melee.MaceMan;
@@ -15,10 +13,7 @@ import cz.muni.soa.warfare.repository.IKingdomsTroopsRepository;
 import cz.muni.soa.warfare.repository.ITroopClassLevelRepository;
 import cz.muni.soa.warfare.repository.ITroopsRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class WarfareOperations {
     private final IKingdomsTroopsRepository kTRepo;
@@ -33,14 +28,14 @@ public class WarfareOperations {
         this.troopRepository = troopRepository;
     }
 
-    public void levelUpTroopClass(TroopClass tC,Long kingdomId) {
-            TroopClassLevel entity = levelRepo.getById(kingdomId);
-            var mapa = entity.getTroopLevel();
-            int troopClassLevel = mapa.get(tC);
-            troopClassLevel++;
-            mapa.put(tC, troopClassLevel);
-            levelRepo.persist(entity);
-        }
+    public void levelUpTroopClass(TroopClass tC, Long kingdomId) {
+        TroopClassLevel entity = levelRepo.getById(kingdomId);
+        var mapa = entity.getTroopLevel();
+        int troopClassLevel = mapa.get(tC);
+        troopClassLevel++;
+        mapa.put(tC, troopClassLevel);
+        levelRepo.persist(entity);
+    }
 
 
     public void setUpLevelsForNewKingdom(Long kingdomId) {
@@ -58,14 +53,14 @@ public class WarfareOperations {
         levelRepo.persist(lvl);
     }
 
-    public void setupKingdomsTroops(Long kingdomId){
+    public void setupKingdomsTroops(Long kingdomId) {
         KingdomsTroops kT = new KingdomsTroops();
         kT.setId(kingdomId);
         kT.setTroops(new ArrayList<>());
         kTRepo.persist(kT);
     }
 
-    public void addTroopsToKingdom(List<Troop> newTroops, Long kingdomId){
+    public void addTroopsToKingdom(List<Troop> newTroops, Long kingdomId) {
         troopRepository.persist(newTroops);
         KingdomsTroops kt = kTRepo.getById(kingdomId);
         kt.getTroops().addAll(newTroops);
@@ -73,7 +68,7 @@ public class WarfareOperations {
     }
 
 
-    public List<Troop> getAvailableTroops(Long kingdomId){
+    public List<Troop> getAvailableTroops(Long kingdomId) {
         KingdomsTroops kt = kTRepo.getById(kingdomId);
         List<Troop> troopList = kt.getTroops();
         return troopList.stream()
@@ -82,33 +77,108 @@ public class WarfareOperations {
     }
 
 
-    public List<Troop> initMockTroops(){
+    public List<Troop> initMockTroops() {
 
         Troop Calvar = new CalvarySword(1);
         Troop Infantry = new InfantrySword(1);
+        Infantry.setAtWar(true);
         Troop Mace = new MaceMan(1);
         Troop Archer = new Archer(1);
+        Archer.setAtWar(true);
 
         Troop Cross = new CrossBowTroop(1);
         Troop Ram = new RamVehicle(1);
         Troop Trebuchet = new Trebuchet(1);
-        return new ArrayList<>(Arrays.asList(Calvar,Infantry,Mace,Archer,Cross,Ram,Trebuchet));
+        return new ArrayList<>(Arrays.asList(Calvar, Infantry, Mace, Archer, Cross, Ram, Trebuchet));
 
     }
 
 
-    public void removeFallenTroops(List<Troop> deceasedTroops,Long kingdomId){
+
+    public void warResult(List<Long> deceased, List<Long> survivors, Long kingdomId) {
+        List<Troop> dec = troopRepository.getById(deceased);
+
+        KingdomsTroops kingdomsTroops = kTRepo.getById(kingdomId);
+        List<Troop> kTList = kTRepo.getAllTroops(kingdomId);
+
+
+        var updatedKingdomsTroops = returnSoldiers(survivors,kTList);
+        kingdomsTroops.setTroops(updatedKingdomsTroops);
+
+        removeFallenTroops(dec,kingdomId);
+
+        System.out.println("ya");
+    }
+
+    public boolean checkIfCanPurchaseTroop(List<TroopRequest> requests, int kingdomMoney) {
+        int sum = 0;
+
+        for (var t : requests){
+            var r = TroopFactory.create(t.clazz);
+            sum += r.getCost();
+        }
+        return sum <= kingdomMoney;
+    }
+
+
+    public void removeFallenTroops(List<Troop> deceasedTroops, Long kingdomId) {
         kTRepo.deleteKingdomsTroopsList(deceasedTroops, kingdomId);
         troopRepository.deleteTroopsList(deceasedTroops);
     }
 
-    public void setupCostsOfTroopClasses(){
+    public List<Troop> returnSoldiers(List<Long> returnedIds, List<Troop> allSoldierOfKingdom){
+
+        for (int i = 0; i < returnedIds.size(); i++) {
+            for (int j = 0; j < allSoldierOfKingdom.size(); j++) {
+                if (Objects.equals(returnedIds.get(i), allSoldierOfKingdom.get(j).getId())){
+                    allSoldierOfKingdom.get(j).setAtWar(false);
+                }
+            }
+        }
+        return new ArrayList<>(allSoldierOfKingdom);
+    }
+
+    public String trainTroops(List<TroopRequest> tR, Long kingdomId){
+        if(!checkIfCanPurchaseTroop(tR,60)) return "Insufficient funds";
+        List<Troop> result = new ArrayList<>();
+
+        for (TroopRequest troopRequest : tR) {
+            if(!checkIfLevelOfRequestedTroop(troopRequest,kingdomId)) return "Troop of wanted level not trainable";
+            List<Troop> temp = new ArrayList<>(getInstances(troopRequest));
+            result.addAll(temp);
+        }
+        troopRepository.persist(result);
+        KingdomsTroops kt = kTRepo.getById(kingdomId);
+        kt.getTroops().addAll(result);
+        kTRepo.persist(kt);
+
+        return "Troops successfully trained";
 
     }
 
-//    public List<Troop>
+    private List<Troop> getInstances(TroopRequest tR){
+        List<Troop> res = new ArrayList<>();
+        for (int i = 0; i < tR.amount; i++) {
+            Troop t = TroopFactory.create(tR.clazz);
+            t.setLevel(tR.level);
+            res.add(t);
+        }
+        return res;
+    }
 
+    private boolean checkIfLevelOfRequestedTroop(TroopRequest tR, Long kingdomId){
+        TroopClassLevel entity = levelRepo.getById(kingdomId);
+        var mapa = entity.getTroopLevel();
+        int troopClassLevel = mapa.get(tR.clazz);
+        return troopClassLevel >= tR.level;
+    }
 
+    public void sendTroopsToWar(List<Troop> troops){
 
+        for (var t : troops){
+            t.setAtWar(true);
+        }
+        troopRepository.persist(troops);
+    }
 
 }

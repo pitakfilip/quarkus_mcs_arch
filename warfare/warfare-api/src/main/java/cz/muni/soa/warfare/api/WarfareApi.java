@@ -20,14 +20,5 @@ public interface WarfareApi {
     )
     Response initKingdomTroops();
 
-    @POST
-    @Path("/mockTroops")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "")
-    @APIResponse(
-            responseCode = "200",
-            description = ""
-    )
-    Response mockInit();
 
 }

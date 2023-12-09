@@ -15,6 +15,7 @@ public class CalvarySword extends MeleeTroop {
         setDps(15);
         setArmor(10);
         setHp(100);
+        setCost(40);
     }
 
     public CalvarySword() {
@@ -23,6 +24,6 @@ public class CalvarySword extends MeleeTroop {
         setDps(15);
         setArmor(10);
         setHp(100);
-
+        setCost(40);
     }
 }

@@ -14,6 +14,7 @@ public class Archer extends RangedTroop {
         setDps(12);
         setArmor(5);
         setHp(30);
+        setCost(25);
     }
 
     public Archer() {
@@ -22,5 +23,6 @@ public class Archer extends RangedTroop {
         setDps(12);
         setArmor(5);
         setHp(30);
+        setCost(25);
     }
 }

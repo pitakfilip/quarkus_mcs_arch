@@ -14,6 +14,7 @@ public class MaceMan extends MeleeTroop {
         setDps(5);
         setArmor(15);
         setHp(65);
+        setCost(25);
     }
 
     public MaceMan() {
@@ -22,5 +23,6 @@ public class MaceMan extends MeleeTroop {
         setDps(5);
         setArmor(15);
         setHp(65);
+        setCost(25);
     }
 }

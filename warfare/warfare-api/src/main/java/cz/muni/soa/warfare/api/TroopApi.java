@@ -2,6 +2,7 @@ package cz.muni.soa.warfare.api;
 
 import cz.muni.soa.warfare.dto.DtoTroop;
 import cz.muni.soa.warfare.dto.DtoTroopClass;
+import cz.muni.soa.warfare.dto.DtoTroopRequest;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -24,16 +25,6 @@ public interface TroopApi {
     List<DtoTroop> getAvailableTroops();
 
     @POST
-    @Path("/addTroops")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "")
-    @APIResponse(
-            responseCode = "200",
-            description = ""
-    )
-     Response addTroops(@RequestBody  List<DtoTroop> troops);
-
-    @POST
     @Path("/levelUp")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -44,4 +35,16 @@ public interface TroopApi {
     )
     Response levelUpClass(@QueryParam("class") DtoTroopClass troopClass);
 
+
+
+    @POST
+    @Path("/trainTroops")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary = "")
+    @APIResponse(
+            responseCode = "200",
+            description = ""
+    )
+    Response trainTroops(@RequestBody List<DtoTroopRequest> requests);
 }

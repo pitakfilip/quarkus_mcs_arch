@@ -32,6 +32,7 @@ public class TroopAssembler {
         Troop troop = TroopFactory.create(TroopClassAssembler.fromDto(dto.troopClass));
         troop.setId(dto.id);
         troop.setLevel(dto.level);
+        troop.setAtWar(dto.atWar);
         return troop;
     }
     

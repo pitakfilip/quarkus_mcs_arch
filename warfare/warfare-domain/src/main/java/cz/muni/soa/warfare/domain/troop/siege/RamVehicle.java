@@ -14,6 +14,7 @@ public class RamVehicle extends SiegeTroop {
         setDps(30);
         setArmor(25);
         setHp(150);
+        setCost(200);
     }
 
     public RamVehicle() {
@@ -22,5 +23,6 @@ public class RamVehicle extends SiegeTroop {
         setDps(30);
         setArmor(25);
         setHp(150);
+        setCost(200);
     }
 }

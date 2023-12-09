@@ -14,7 +14,7 @@ public class InfantrySword extends MeleeTroop {
         setDps(8);
         setArmor(5);
         setHp(40);
-
+        setCost(20);
     }
 
     public InfantrySword() {
@@ -23,6 +23,6 @@ public class InfantrySword extends MeleeTroop {
         setDps(8);
         setArmor(5);
         setHp(40);
-
+        setCost(20);
     }
 }

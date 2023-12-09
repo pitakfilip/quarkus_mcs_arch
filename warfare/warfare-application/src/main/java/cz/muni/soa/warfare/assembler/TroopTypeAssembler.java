@@ -6,11 +6,11 @@ import cz.muni.soa.warfare.dto.DtoTroopType;
 public class TroopTypeAssembler {
 
     public static DtoTroopType toDto(TroopType status) {
-        return DtoTroopType.values()[status.ordinal()];
+        return DtoTroopType.valueOf(status.name());
     }
 
     public static TroopType fromDto(DtoTroopType dto) {
-        return TroopType.values()[dto.ordinal()];
+        return TroopType.valueOf(dto.name());
     }
 
 }

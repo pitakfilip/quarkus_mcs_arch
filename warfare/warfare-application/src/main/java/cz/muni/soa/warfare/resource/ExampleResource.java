@@ -14,6 +14,7 @@ import cz.muni.soa.warfare.domain.troop.siege.Trebuchet;
 import cz.muni.soa.warfare.domain.troop.Troop;
 import cz.muni.soa.warfare.domain.troop.TroopClass;
 import cz.muni.soa.warfare.dto.DtoTroopClass;
+import cz.muni.soa.warfare.dto.DtoTroopRequest;
 import cz.muni.soa.warfare.repository.IKingdomsTroopsRepository;
 import cz.muni.soa.warfare.repository.ITroopClassLevelRepository;
 import cz.muni.soa.warfare.repository.ITroopsRepository;
@@ -61,7 +62,23 @@ public class ExampleResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public  void hello() {
-        service.levelUpClass(DtoTroopClass.ARCHER);
+    public  String hello() {
+        DtoTroopRequest t = new DtoTroopRequest();
+        t.clazz =  DtoTroopClass.CROSSBOW_TROOP;
+        t.level = 1;
+        t.amount = 2;
+        DtoTroopRequest r = new DtoTroopRequest();
+        r.level = 1;
+        r.amount = 10;
+        r.clazz = DtoTroopClass.MACEMAN;
+
+        List<DtoTroopRequest> reqs = List.of(t,r);
+
+        service.trainTroops(reqs);
+
+        service.troopsToWar(List.of(4L,5L));
+
+        service.warResult(List.of(4L), List.of(5L));
+        return "uwu";
     }
 }
