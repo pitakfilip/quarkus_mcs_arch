@@ -12,15 +12,14 @@ import java.util.List;
 
 public interface BattleApi {
     @POST
-    @Path("/{kingdom}:{target}")
+    @Path("/{target}")
     @Produces(MediaType.APPLICATION_JSON)  // just the battle id
     @Operation(summary = "Attack another kingdom with given troops")
     @APIResponse(responseCode = "200", description = "Battle created")
     @APIResponse(responseCode = "400", description = "Validation error")
-    @APIResponse(responseCode = "404", description = "Kingdoms or troops not found")
+    @APIResponse(responseCode = "404", description = "Kingdom or troops not found")
     @APIResponse(responseCode = "500", description = "Error in service dependencies")
     Response /*DtoBattle*/ createBattle(
-            @PathParam("kingdom") long kingdom,
             @PathParam("target") long target,
             @RequestBody List<DtoTroop> troops
     );
