@@ -44,7 +44,7 @@ public class FoundationOperations {
     /** WARNING - need transaction */
     public void addNewProducer(long kingdomId, ResourceType type) throws Exception {
         Foundation foundation = repository.ofKingdom(kingdomId);
-        if (foundation != null) {
+        if (foundation == null) {
             throw new Exception("Foundation for provided Kingdom id={" + kingdomId + "} not found.");
         }
 
