@@ -26,6 +26,7 @@
 
         <!--   DOMAIN     -->
         <infrastructure.version>1.0-SNAPSHOT</infrastructure.version>
+        <warfare.version>1.0-SNAPSHOT</warfare.version>
         <!--   TECH     -->
         <quarkus.platform.version>3.6.0</quarkus.platform.version>
         <jakarta-persistence.version>3.1.0</jakarta-persistence.version>
@@ -49,6 +50,11 @@
                 <artifactId>infrastructure-application</artifactId>
                 <version>${infrastructure.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cz.muni.soa.warfare</groupId>
+                <artifactId>warfare-api</artifactId>
+                <version>${warfare.version}</version>
+            </dependency>
             
             <dependency>
                 <groupId>io.quarkus.platform</groupId>
@@ -57,12 +63,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <dependency>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
-            </dependency>
-
             <dependency>
                 <groupId>jakarta.persistence</groupId>
                 <artifactId>jakarta.persistence-api</artifactId>
