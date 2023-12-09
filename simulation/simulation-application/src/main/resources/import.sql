@@ -32,7 +32,6 @@ insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, 
 insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 50, 50, 3, 0, -1);
 insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 5, 200, 200, 2, 3, -1);
 insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 5, 200, 200, 2, 3, -1);
-alter sequence troop_id_seq restart with 20;
 
 -- private BattleStatus status;
     -- WAITING,
@@ -46,7 +45,6 @@ alter sequence troop_id_seq restart with 20;
 insert into battle (status, result, round, attacker, defender) values(1, 0, 2, 1, 2);
 insert into battle (status, result, round, attacker, defender) values(0, 0, 0, 2, 3);
 insert into battle (status, result, round, attacker, defender) values(0, 0, 0, 4, 5);
-alter sequence battle_id_seq restart with 3;
 
 -- 1v1 brawl (already started)
 insert into attacker_troops (id, troop_id) values(1, 1);
