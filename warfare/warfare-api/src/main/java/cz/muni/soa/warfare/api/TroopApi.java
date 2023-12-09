@@ -1,6 +1,7 @@
 package cz.muni.soa.warfare.api;
 
 import cz.muni.soa.warfare.dto.DtoTroop;
+import cz.muni.soa.warfare.dto.DtoTroopClass;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -41,6 +42,6 @@ public interface TroopApi {
             responseCode = "200",
             description = ""
     )
-    Response levelUpClass(@QueryParam("class") String troopClass);
+    Response levelUpClass(@QueryParam("class") DtoTroopClass troopClass);
 
 }

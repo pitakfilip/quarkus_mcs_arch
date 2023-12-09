@@ -10,7 +10,7 @@ public class TroopClassAssembler {
     }
 
     public static TroopClass fromDto(DtoTroopClass dto) {
-        return TroopClass.values()[dto.ordinal()];
+        return TroopClass.valueOf(dto.name());
     }
     
 }
