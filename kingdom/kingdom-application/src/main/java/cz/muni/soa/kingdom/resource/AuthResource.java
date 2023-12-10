@@ -60,6 +60,15 @@ public class AuthResource implements AuthApi {
 
     @Override
     public Response logout() {
-        return null;
+        NewCookie cookie = new NewCookie.Builder("JWT")
+                .secure(true)
+                .maxAge(1)
+                .value("")
+                .build();
+
+        return Response.ok()
+                .header(HttpHeaders.AUTHORIZATION, "")
+                .cookie(cookie)
+                .build();
     }
 }
