@@ -15,14 +15,16 @@ import java.util.List;
 public interface TroopApi {
 
     @GET
-    @Path("/available")
+    @Path("/available/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "")
     @APIResponse(
             responseCode = "200",
             description = ""
     )
-    List<DtoTroop> getAvailableTroops();
+    List<DtoTroop> getAvailableTroops(@PathParam("id") Long id);
+
+
 
     @POST
     @Path("/levelUp")

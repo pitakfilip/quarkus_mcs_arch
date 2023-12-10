@@ -22,8 +22,8 @@ public class TroopResource implements TroopApi {
 
 
     @Override
-    public List<DtoTroop> getAvailableTroops() {
-        return (service.getAvailableTroops());
+    public List<DtoTroop> getAvailableTroops(Long id) {
+        return (service.getAvailableTroops(id));
     }
 
     @Override

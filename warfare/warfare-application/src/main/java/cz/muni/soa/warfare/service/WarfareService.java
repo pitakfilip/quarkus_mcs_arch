@@ -50,11 +50,11 @@ public class WarfareService {
         warfareOperations.setupKingdomsTroops(context.getKingdomId());
     }
 
-    public List<DtoTroop> getAvailableTroops(){
+    public List<DtoTroop> getAvailableTroops(Long id){
         WarfareOperations warfareOperations = new WarfareOperations(kingdomsTroopsRepository,
                 levelRepository,
                 troopsRepository);
-        return TroopAssembler.toDto(warfareOperations.getAvailableTroops(context.getKingdomId()));
+        return TroopAssembler.toDto(warfareOperations.getAvailableTroops(id));
     }
     public void levelUpClass(DtoTroopClass tC){
         WarfareOperations warfareOperations = new WarfareOperations(kingdomsTroopsRepository,
