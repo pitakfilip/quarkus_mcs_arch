@@ -41,6 +41,7 @@ public class Foundation {
 
     public Foundation(long kingdomId) {
         this.kingdomId = kingdomId;
+        this.storage = new ResourceStorage();
         defences = new ArrayList<>();
         producers = new ArrayList<>();
     }

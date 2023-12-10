@@ -1,8 +1,12 @@
 package cz.muni.soa.foundation.domain;
 
+import cz.muni.soa.foundation.domain.defence.Defence;
 import cz.muni.soa.foundation.domain.defence.DefenceFactory;
 import cz.muni.soa.foundation.domain.resource.*;
 import cz.muni.soa.foundation.domain.resource.producer.*;
+import cz.muni.soa.foundation.domain.repository.IDefenceRepository;
+import cz.muni.soa.foundation.domain.repository.IFoundationRepository;
+import cz.muni.soa.foundation.domain.repository.IProducerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +14,16 @@ import java.util.Map;
 
 public class FoundationOperations {
 
-    private final FoundationRepository repository;
+    private final IFoundationRepository repository;
 
+    private final IDefenceRepository defenceRepository;
     
-    public FoundationOperations(FoundationRepository repository) {
+    private final IProducerRepository producerRepository;
+    
+    public FoundationOperations(IFoundationRepository repository, IDefenceRepository defenceRepository, IProducerRepository producerRepository) {
         this.repository = repository;
+        this.defenceRepository = defenceRepository;
+        this.producerRepository = producerRepository;
     }
 
     public void createNewFoundation(long kingdomId) throws Exception {
@@ -22,22 +31,23 @@ public class FoundationOperations {
         if (existing != null) {
             throw new Exception("Foundation for provided Kingdom id={" + kingdomId + "} already exists.");
         }
+        
+        List<Defence> defences = new ArrayList<>();
+        defences.add(DefenceFactory.wall());
+        defences.add(DefenceFactory.archerTower());
+        defenceRepository.persist(defences);
+        
+        List<ResourceProducer> producers = new ArrayList<>();
+        producers.add(new Lumberjack());
+        producers.add(new Lumberjack());
+        producers.add(new IronMine());
+        producers.add(new GoldSmelter());
+        producerRepository.persist(producers);
+        
+        
         Foundation foundation = new Foundation(kingdomId);
-        foundation.getDefences().addAll(
-                List.of(
-                        DefenceFactory.wall(),
-                        DefenceFactory.archerTower()
-                )
-        );
-        foundation.getProducers().addAll(
-                List.of(
-                        new Lumberjack(),
-                        new Lumberjack(),
-                        new IronMine(),
-                        new GoldSmelter()
-                )
-        );
-
+        foundation.getDefences().addAll(defences);
+        foundation.getProducers().addAll(producers);
         repository.persist(foundation);
     }
 
@@ -74,6 +84,7 @@ public class FoundationOperations {
             case IRON -> new IronMine();
             case GOLD -> new GoldSmelter();
         };
+        producerRepository.persist(producer);
         
         foundation.getProducers().add(producer);
         repository.persist(foundation);

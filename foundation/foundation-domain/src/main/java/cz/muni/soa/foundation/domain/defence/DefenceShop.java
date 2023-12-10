@@ -1,7 +1,12 @@
 package cz.muni.soa.foundation.domain.defence;
 
 import cz.muni.soa.foundation.domain.Foundation;
-import cz.muni.soa.foundation.domain.FoundationRepository;
+import cz.muni.soa.foundation.domain.defence.active.ArcherTower;
+import cz.muni.soa.foundation.domain.defence.active.Batman;
+import cz.muni.soa.foundation.domain.defence.active.Cannon;
+import cz.muni.soa.foundation.domain.defence.passive.GalacticShield;
+import cz.muni.soa.foundation.domain.repository.IDefenceRepository;
+import cz.muni.soa.foundation.domain.repository.IFoundationRepository;
 import cz.muni.soa.foundation.domain.resource.ResourceStorage;
 import cz.muni.soa.foundation.domain.resource.ResourceType;
 
@@ -9,17 +14,22 @@ import java.util.Map;
 
 public class DefenceShop {
 
-    private final FoundationRepository repository;
+    private final IFoundationRepository repository;
+    
+    private final IDefenceRepository defenceRepository;
 
-    public DefenceShop(FoundationRepository repository) {
+    public DefenceShop(IFoundationRepository repository, IDefenceRepository defenceRepository) {
         this.repository = repository;
+        this.defenceRepository = defenceRepository;
     }
     
     public void buyArcherTower(long kingdomId) {
         Foundation foundation = repository.ofKingdom(kingdomId);
         
         if (buyDefence(foundation, DefenceCosts.archerTower())) {
-            foundation.getDefences().add(DefenceFactory.archerTower());
+            ArcherTower archerTower = DefenceFactory.archerTower();
+            defenceRepository.persist(archerTower);
+            foundation.getDefences().add(archerTower);
             repository.persist(foundation);
         }
     }
@@ -28,7 +38,9 @@ public class DefenceShop {
         Foundation foundation = repository.ofKingdom(kingdomId);
 
         if (buyDefence(foundation, DefenceCosts.cannon())) {
-            foundation.getDefences().add(DefenceFactory.cannon());
+            Cannon cannon = DefenceFactory.cannon();
+            defenceRepository.persist(cannon);
+            foundation.getDefences().add(cannon);
             repository.persist(foundation);
         }
     }
@@ -37,7 +49,9 @@ public class DefenceShop {
         Foundation foundation = repository.ofKingdom(kingdomId);
 
         if (buyDefence(foundation, DefenceCosts.batman())) {
-            foundation.getDefences().add(DefenceFactory.batman());
+            Batman batman = DefenceFactory.batman();
+            defenceRepository.persist(batman);
+            foundation.getDefences().add(batman);
             repository.persist(foundation);
         }
     }
@@ -48,7 +62,9 @@ public class DefenceShop {
         Foundation foundation = repository.ofKingdom(kingdomId);
 
         if (buyDefence(foundation, DefenceCosts.galacticShield())) {
-            foundation.getDefences().add(DefenceFactory.shield());
+            GalacticShield shield = DefenceFactory.shield();
+            defenceRepository.persist(shield);
+            foundation.getDefences().add(shield);
             repository.persist(foundation);
         }
     }

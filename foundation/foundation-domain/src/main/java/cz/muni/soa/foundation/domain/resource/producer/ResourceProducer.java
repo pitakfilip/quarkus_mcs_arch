@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "PRODUCE", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "PRODUCER", discriminatorType = DiscriminatorType.STRING)
 public abstract class ResourceProducer {
 
     @Id
