@@ -44,4 +44,6 @@ public interface ShopApi {
     )
     Response buyProducer(@QueryParam("type") DtoProducerType type) throws Exception;
 
+    //TODO spend money endpoint po natrenovani troopov
+
 }

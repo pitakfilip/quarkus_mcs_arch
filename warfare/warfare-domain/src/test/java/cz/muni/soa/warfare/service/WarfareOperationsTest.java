@@ -7,6 +7,7 @@ import cz.muni.soa.warfare.repository.ITroopsRepository;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.mockito.Mockito.mock;
@@ -34,48 +35,4 @@ public class WarfareOperationsTest {
     }
 
 
-
-//    @Test
-//    public void testAddTroopsToKingdom(){
-//        Troop t = new CalvarySword(1);
-//        Troop r = new CalvarySword(1);
-//        Troop e = new Archer(1);
-//        Troop w = new MaceMan(1);
-//        w.setAtWar(true);
-//
-//        Troop R = new RamVehicle(1);
-//        Troop T = new Trebuchet(1);
-//
-//
-//        List<Troop> temp = List.of(t,r,e,w);
-//        KingdomsTroops k = new KingdomsTroops();
-//        k.setKingdomId(1L);
-//
-//        k.setTroops(temp);
-//        kTRepo.persist(k);
-//
-//        wfr.addTroopsToKingdom(List.of(T,R),1L);
-//
-//        when(kTRepo.getAllTroops(1L)).thenReturn(List.of(t,r,e,w,T,R));
-//    }
-//
-//
-//    @Test
-//    public void testAvailableTroops(){
-//        Troop t = new CalvarySword(1);
-//        Troop r = new CalvarySword(1);
-//        Troop e = new Archer(1);
-//        Troop w = new MaceMan(1);
-//        w.setAtWar(true);
-//
-//
-//        List<Troop> temp = List.of(t,r,e,w);
-//        KingdomsTroops k = new KingdomsTroops();
-//        k.setKingdomId(1L);
-//
-//        k.setTroops(temp);
-//        kTRepo.persist(k);
-//
-//        when(wfr.getAvailableTroops(1L)).thenReturn(List.of(t,r,e));
-//    }
 }

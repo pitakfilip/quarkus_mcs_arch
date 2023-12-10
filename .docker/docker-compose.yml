@@ -9,11 +9,12 @@ services:
         ports:
             - "5432:5432"
         environment:
-            - POSTGRES_DB=mcs_db
-            - POSTGRES_USER=root
-            - POSTGRES_PASSWORD=groot
-    #        volumes:
-    #            - postgres_data:/var/lib/postgresql/data
+            POSTGRES_DB: mcs_db
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: groot
+    #       TODO uncomment once db data prepared
+            volumes:
+                -./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
 
     pgadmin:
         image: dpage/pgadmin4
@@ -30,9 +31,11 @@ services:
 
     consul:
         image: consul:1.15
+
         ports:
             - "8500:8500"
             - "8600:8600/udp"
+        
         command: "agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0"
     
     consul-kv-init:
@@ -47,3 +50,33 @@ services:
         command: "fs2consulkv.py -p /kv-source/properties -c http://consul:8500 -k config/ -t iamacl -s 1 --skip-prompt"
 #        command: "sh /kv-source/init_kv.sh"
 
+
+    prometheus:
+        image: prom/prometheus
+        container_name: prometheus
+        network_mode: host    # while services are running from an IDE
+        volumes:
+            - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+        command:
+            - --config.file=/etc/prometheus/prometheus.yml
+        ports:
+            - "9090:9090"
+
+    grafana:
+        # run monitoring/grafana/init.sh after first run to initialize datasource/dashboard
+        image: grafana/grafana
+        container_name: grafana
+        network_mode: host    # while services are running from an IDE
+        ports:
+            - "3000:3000"
+        # default username/password is admin/admin
+        # uncomment the following for anonymous access on a local deployment:
+        # environment:
+        #     - GF_AUTH_ANONYMOUS_ENABLED=true
+        #     - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+
+
+
+#   TODO postgres data: need entry data, setup accounts for each service, define structures, ...
+#    volumes:
+#        postgres_data:

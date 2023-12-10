@@ -1,6 +1,6 @@
 package cz.muni.soa.simulation.api;
 
-import cz.muni.soa.simulation.dto.DtoTroop;
+import cz.muni.soa.warfare.dto.DtoTroop;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -12,17 +12,16 @@ import java.util.List;
 
 public interface BattleApi {
     @POST
-    @Path("/{kingdom}:{target}")
+    @Path("/{target}")
     @Produces(MediaType.APPLICATION_JSON)  // just the battle id
     @Operation(summary = "Attack another kingdom with given troops")
     @APIResponse(responseCode = "200", description = "Battle created")
     @APIResponse(responseCode = "400", description = "Validation error")
-    @APIResponse(responseCode = "404", description = "Kingdoms or troops not found")
+    @APIResponse(responseCode = "404", description = "Kingdom or troops not found")
     @APIResponse(responseCode = "500", description = "Error in service dependencies")
     Response /*DtoBattle*/ createBattle(
-            @PathParam("kingdom") long kingdom,
             @PathParam("target") long target,
-            @RequestBody List<DtoTroop> troops
+            @RequestBody List<cz.muni.soa.warfare.dto.DtoTroop> troops
     );
 
     @GET
@@ -32,10 +31,11 @@ public interface BattleApi {
     @APIResponse(responseCode = "404")
     Response /*DtoBattle*/ getBattle(@PathParam("id") long id);
 
+    // TODO eventually remove when CRONs work
     @POST
-    @Path("/round/{id}")
+    @Path("/advance/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @APIResponse(responseCode = "200")
     @APIResponse(responseCode = "404")
-    Response /*DtoBattle*/ performCombatRound(@PathParam("id") long id);
+    Response /*DtoBattle*/ advanceBattle(@PathParam("id") long id);
 }

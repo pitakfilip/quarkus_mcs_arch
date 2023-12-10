@@ -2,6 +2,7 @@ package cz.muni.soa.simulation.assembler;
 
 import cz.muni.soa.simulation.domain.Battle;
 import cz.muni.soa.simulation.dto.DtoBattle;
+import cz.muni.soa.warfare.dto.DtoWarResult;
 
 public class BattleAssembler {
     

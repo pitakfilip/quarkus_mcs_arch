@@ -14,13 +14,13 @@ import java.util.List;
 public class BattleResource implements BattleApi {
     @Inject
     WarfareService service;
-
+    @Transactional
     @Override
-    public Response warResult(DtoWarResult warResult) {
-        service.warResult(warResult.deceasedTroops, warResult.survivorTroops);
+    public Response warResult(DtoWarResult warResult, Long kingdomId) {
+        service.warResult(warResult.deceasedTroops, warResult.survivorTroops,kingdomId);
         return Response.ok().build();
     }
-
+    @Transactional
     @Override
     public Response sendToWar(List<Long> troops) {
         service.troopsToWar(troops);

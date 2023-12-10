@@ -76,6 +76,12 @@ public class WarfareOperations {
                 .toList();
     }
 
+    public int getLevelOfTroopClass(TroopClass tC,Long kingdomId){
+        TroopClassLevel entity = levelRepo.getById(kingdomId);
+        var mapa = entity.getTroopLevel();
+        return mapa.get(tC);
+    }
+
 
     public List<Troop> initMockTroops() {
 
@@ -106,18 +112,16 @@ public class WarfareOperations {
         kingdomsTroops.setTroops(updatedKingdomsTroops);
 
         removeFallenTroops(dec,kingdomId);
-
-        System.out.println("ya");
     }
 
-    public boolean checkIfCanPurchaseTroop(List<TroopRequest> requests, int kingdomMoney) {
+    public int getCostOfRequest(List<TroopRequest> requests) {
         int sum = 0;
 
         for (var t : requests){
             var r = TroopFactory.create(t.clazz);
             sum += r.getCost();
         }
-        return sum <= kingdomMoney;
+        return sum;
     }
 
 
@@ -128,10 +132,10 @@ public class WarfareOperations {
 
     public List<Troop> returnSoldiers(List<Long> returnedIds, List<Troop> allSoldierOfKingdom){
 
-        for (int i = 0; i < returnedIds.size(); i++) {
-            for (int j = 0; j < allSoldierOfKingdom.size(); j++) {
-                if (Objects.equals(returnedIds.get(i), allSoldierOfKingdom.get(j).getId())){
-                    allSoldierOfKingdom.get(j).setAtWar(false);
+        for (Long returnedId : returnedIds) {
+            for (Troop troop : allSoldierOfKingdom) {
+                if (Objects.equals(returnedId, troop.getId())) {
+                    troop.setAtWar(false);
                 }
             }
         }
@@ -139,7 +143,6 @@ public class WarfareOperations {
     }
 
     public String trainTroops(List<TroopRequest> tR, Long kingdomId){
-        if(!checkIfCanPurchaseTroop(tR,60)) return "Insufficient funds";
         List<Troop> result = new ArrayList<>();
 
         for (TroopRequest troopRequest : tR) {
@@ -174,7 +177,6 @@ public class WarfareOperations {
     }
 
     public void sendTroopsToWar(List<Troop> troops){
-
         for (var t : troops){
             t.setAtWar(true);
         }

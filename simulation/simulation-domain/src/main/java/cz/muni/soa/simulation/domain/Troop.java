@@ -1,16 +1,15 @@
 package cz.muni.soa.simulation.domain;
 
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "Abstract", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "simulation_troop")
 public class Troop {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // some fields from warfare domain are left out because they're not needed here
+    // some fields are different from warfare domain, see TroopAssembler
     private TroopType troopType;
     private TroopClass troopClass;
     private int hp;

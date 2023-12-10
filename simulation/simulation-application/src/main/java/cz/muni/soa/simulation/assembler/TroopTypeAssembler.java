@@ -12,4 +12,12 @@ public class TroopTypeAssembler {
     public static TroopType fromDto(DtoTroopType dto) {
         return TroopType.values()[dto.ordinal()];
     }
+
+    ////////////////////////////////////////////////////////////////////////////////
+
+    // One way only.
+
+    public static DtoTroopType dtoFromWarfareDto(cz.muni.soa.warfare.dto.DtoTroopType troopType) {
+        return DtoTroopType.values()[troopType.ordinal()];
+    }
 }

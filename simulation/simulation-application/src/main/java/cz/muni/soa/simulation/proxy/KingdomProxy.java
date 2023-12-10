@@ -1,13 +1,13 @@
-package cz.muni.soa.kingdom.proxy;
+package cz.muni.soa.simulation.proxy;
 
 import cz.muni.soa.infrastructure.security.ServiceAuthHeaderPropagation;
-import cz.muni.soa.warfare.api.WarfareApi;
+import cz.muni.soa.kingdom.api.KingdomApi;
 import jakarta.ws.rs.Path;
 import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-@Path("/shop")
+@Path("/kingdom")
 @RegisterClientHeaders(ServiceAuthHeaderPropagation.class)
-@RegisterRestClient(baseUri = "stork://warfare")
-public interface WarfareProxy extends WarfareApi {
+@RegisterRestClient(baseUri = "stork://kingdom")
+public interface KingdomProxy extends KingdomApi {
 }
