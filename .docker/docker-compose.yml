@@ -9,10 +9,9 @@ services:
         ports:
             - "5432:5432"
         environment:
-            POSTGRES_DB: mcs_db
-            POSTGRES_USER: root
-            POSTGRES_PASSWORD: groot
-    #       TODO uncomment once db data prepared
+            - POSTGRES_DB=mcs_db
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=groot
     #        volumes:
     #            - postgres_data:/var/lib/postgresql/data
 
@@ -31,11 +30,9 @@ services:
 
     consul:
         image: consul:1.15
-
         ports:
             - "8500:8500"
             - "8600:8600/udp"
-        
         command: "agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0"
     
     consul-kv-init:
@@ -50,8 +47,3 @@ services:
         command: "fs2consulkv.py -p /kv-source/properties -c http://consul:8500 -k config/ -t iamacl -s 1 --skip-prompt"
 #        command: "sh /kv-source/init_kv.sh"
 
-
-
-#   TODO postgres data: need entry data, setup accounts for each service, define structures, ...
-#    volumes:
-#        postgres_data:
