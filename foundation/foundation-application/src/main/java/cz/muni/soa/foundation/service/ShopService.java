@@ -50,6 +50,24 @@ public class ShopService {
     }
 
     @Transactional
+    public void spendResources(DtoResourceType type, long amount) throws Exception {
+        Foundation foundation = repository.ofKingdom(context.getKingdomId());
+
+        if (foundation == null) {
+            throw new Exception("Foundation for provided kingdom not found");
+        }
+
+        long has = foundation.getStorage().getResource(ResourceTypeAssembler.fromDto(type));
+        if (has < amount) {
+            throw new Exception(String.format("Not enough funds! Requested amount: %d, " +
+                    "current amount of resource: %d", amount, has));
+        }
+        
+        foundation.getStorage().subtract(ResourceTypeAssembler.fromDto(type), amount);
+        repository.persist(foundation);
+    }
+    
+    @Transactional
     public void buyDefence(DtoDefenceType type) throws Exception {
         DefenceShop shop = new DefenceShop(repository, defenceRepository);
         

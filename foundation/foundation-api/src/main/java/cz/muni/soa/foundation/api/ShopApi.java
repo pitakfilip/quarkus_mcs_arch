@@ -23,6 +23,17 @@ public interface ShopApi {
     )
     DtoResourceRequest hasResources(@PathParam("type") DtoResourceType type, 
                                     @QueryParam("need") long amount) throws Exception;
+    
+    @POST
+    @Path("/spend/{type}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "")
+    @APIResponse(
+            responseCode = "200",
+            description = ""
+    )
+    Response spendResources(@PathParam("type") DtoResourceType type,
+                            @QueryParam("need") long amount) throws Exception;
 
     @GET
     @Path("/defence")

@@ -23,6 +23,12 @@ public class ShopResource implements ShopApi {
     }
 
     @Override
+    public Response spendResources(DtoResourceType type, long amount) throws Exception {
+        service.spendResources(type, amount);
+        return Response.ok().build();
+    }
+
+    @Override
     public Response buyDefence(DtoDefenceType type) throws Exception {
         service.buyDefence(type);
         return Response.ok().build();
