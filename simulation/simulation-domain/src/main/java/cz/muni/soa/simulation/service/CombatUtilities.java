@@ -76,6 +76,7 @@ public class CombatUtilities {
         return true;
     }
 
+    // TODO THESE WERE BROKEN FOR ME, NO IDEA WHY
     public List<Long> getDeceasedTroops(List<Troop> troops) {
         List<Long> deceasedTroops = new ArrayList<>();
         for (Troop troop : troops) {

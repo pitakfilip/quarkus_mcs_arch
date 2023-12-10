@@ -25,9 +25,4 @@ public class BattleResource implements BattleApi {
     public Response getBattle(long id) {
         return service.getBattle(id);
     }
-
-    @Override
-    public Response advanceBattle(long id) {
-        return service.advanceBattle(id);
-    }
 }

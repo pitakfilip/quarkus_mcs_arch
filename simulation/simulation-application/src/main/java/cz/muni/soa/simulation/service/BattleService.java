@@ -5,22 +5,23 @@ import cz.muni.soa.kingdom.dto.DtoKingdom;
 import cz.muni.soa.simulation.assembler.BattleAssembler;
 import cz.muni.soa.simulation.assembler.TroopAssembler;
 import cz.muni.soa.simulation.domain.*;
-import cz.muni.soa.simulation.dto.DtoTroop;
 import cz.muni.soa.simulation.proxy.KingdomProxy;
 import cz.muni.soa.simulation.proxy.WarfareBattleProxy;
 import cz.muni.soa.simulation.proxy.WarfareTroopProxy;
 import cz.muni.soa.simulation.repository.IBattleRepository;
 import cz.muni.soa.simulation.repository.ITroopRepository;
 import cz.muni.soa.warfare.dto.*;
+import io.quarkus.scheduler.Scheduled;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import static java.lang.Integer.max;
 
@@ -78,12 +79,29 @@ public class BattleService {
         battle.setAttackerTroops(attackerTroops);
         battle.setDefenderTroops(defenderTroops);  // later
 
+        // TODO THIS MIGHT FAIL
+        List<Long> troopIds = troops.stream().map(troop -> troop.id).collect(Collectors.toList());
+        warfareBattleApi.sendToWar(troopIds);
+
         troopRepository.persist(attackerTroops);
         troopRepository.persist(defenderTroops);
         battleRepository.persist(battle);
 
         return Response.ok(BattleAssembler.toDto(battle)).build();
     }
+
+    @Scheduled(every = "2s")
+    public void advanceFirstUnfinishedBattle() {
+        CombatUtilities combatUtilities = new CombatUtilities(troopRepository, battleRepository);
+
+        Optional<Battle> battle = battleRepository.getFirstUnfinishedBattle();
+
+        if (battle.isPresent()) {
+            advanceBattle(battle.get().getId());
+        }
+    }
+
+    // Combat logic.
 
     @Transactional
     void pickEligibleTarget(Troop troop, List<Troop> enemies) {
@@ -114,7 +132,6 @@ public class BattleService {
         int start = random.nextInt(enemies.size());
         for (int offset = 0; offset < enemies.size(); offset++) {
             int new_target = (start + offset) % enemies.size();
-            System.out.println("new_target " + new_target + ", start " + start + ", offset " + offset + ", size " + enemies.size());
 
             if (combatUtilities.isEligibleTarget(troop, enemies.get(new_target), enemyHasLivingMeleeTroops)) {
                 troop.setTarget(new_target);
@@ -237,22 +254,20 @@ public class BattleService {
         assert(battle.getStatus() == BattleStatus.FINISHING);
 
         // call warfare with deceased/survivor troops for each of the kingdoms
-        DtoWarResult attackerResult = troopAssembler.toWarResultDto(battle.getAttackerTroops());
-        DtoWarResult defenderResult = troopAssembler.toWarResultDto(battle.getDefenderTroops());
-        warfareBattleApi.warResult(troopAssembler.toWarResultDto(battle.getAttackerTroops()));
-        warfareBattleApi.warResult(troopAssembler.toWarResultDto(battle.getDefenderTroops()));
+        DtoWarResult attackerResult = troopAssembler.dtoToWarResultDto(battle.getAttackerTroops());
+        DtoWarResult defenderResult = troopAssembler.dtoToWarResultDto(battle.getDefenderTroops());
+        // TODO THIS MIGHT ALSO FAIL
+        warfareBattleApi.warResult(attackerResult, battle.getAttacker());
+        warfareBattleApi.warResult(defenderResult, battle.getDefender());
 
         battle.setStatus(BattleStatus.FINISHED);
         battleRepository.persist(battle);
     }
 
-    public Response /*DtoBattle*/ advanceBattle(long id) {
+    void advanceBattle(long id) {
         CombatUtilities combatUtilities = new CombatUtilities(troopRepository, battleRepository);
 
         Battle battle = battleRepository.getById(id);
-        if (battle == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Battle " + id + " not found.").build();
-        }
 
         assert(battle.getStatus() != BattleStatus.FINISHED);
         switch (battle.getStatus()) {
@@ -267,7 +282,5 @@ public class BattleService {
                     finishBattle(id);
                     break;
         }
-
-        return getBattle(id);
     }
 }

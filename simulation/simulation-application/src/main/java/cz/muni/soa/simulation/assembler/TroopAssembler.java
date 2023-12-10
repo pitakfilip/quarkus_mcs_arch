@@ -1,8 +1,6 @@
 package cz.muni.soa.simulation.assembler;
 
-import cz.muni.soa.simulation.domain.Battle;
 import cz.muni.soa.simulation.domain.Troop;
-import cz.muni.soa.simulation.dto.DtoBattle;
 import cz.muni.soa.simulation.dto.DtoTroop;
 import cz.muni.soa.simulation.repository.IBattleRepository;
 import cz.muni.soa.simulation.repository.ITroopRepository;
@@ -83,7 +81,7 @@ public class TroopAssembler {
                 .collect(Collectors.toList());
     }
 
-    public DtoWarResult toWarResultDto(List<Troop> troops) {
+    public DtoWarResult dtoToWarResultDto(List<Troop> troops) {
         CombatUtilities combatUtilities = new CombatUtilities(troopRepository, battleRepository);
 
         DtoWarResult dto = new DtoWarResult();
