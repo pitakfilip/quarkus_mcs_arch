@@ -35,7 +35,7 @@ public class TroopResource implements TroopApi {
 
     @Override
     @Transactional
-    public Response trainTroops(List<DtoTroopRequest> requests) {
+    public Response trainTroops(List<DtoTroopRequest> requests) throws Exception {
         return Response.ok(service.trainTroops(requests)).build();
     }
 

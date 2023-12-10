@@ -13,8 +13,8 @@ services:
             POSTGRES_USER: root
             POSTGRES_PASSWORD: groot
     #       TODO uncomment once db data prepared
-    #        volumes:
-    #            - postgres_data:/var/lib/postgresql/data
+            volumes:
+                -./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
 
     pgadmin:
         image: dpage/pgadmin4

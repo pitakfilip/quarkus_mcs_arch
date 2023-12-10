@@ -18,7 +18,7 @@ public interface WarfareApi {
             responseCode = "200",
             description = ""
     )
-    Response initKingdomTroops();
+    Response initKingdomTroops() throws Exception;
 
 
 }

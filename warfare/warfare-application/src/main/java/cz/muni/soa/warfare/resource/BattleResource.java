@@ -20,7 +20,7 @@ public class BattleResource implements BattleApi {
         service.warResult(warResult.deceasedTroops, warResult.survivorTroops);
         return Response.ok().build();
     }
-
+    @Transactional
     @Override
     public Response sendToWar(List<Long> troops) {
         service.troopsToWar(troops);

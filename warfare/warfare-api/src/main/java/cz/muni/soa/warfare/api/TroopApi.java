@@ -46,5 +46,5 @@ public interface TroopApi {
             responseCode = "200",
             description = ""
     )
-    Response trainTroops(@RequestBody List<DtoTroopRequest> requests);
+    Response trainTroops(@RequestBody List<DtoTroopRequest> requests) throws Exception;
 }
