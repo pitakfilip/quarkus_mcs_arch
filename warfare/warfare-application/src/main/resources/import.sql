@@ -9,4 +9,4 @@
 -- insert into kingdomstroops (id) values (1);
 -- insert into kingdoms_troops(id, troop_id) values (1,1)
 
-insert into foundation(gold, id, iron, kingdomid, wood) VALUES (500,1,0,1,0);
+-- insert into foundation(gold, id, iron, kingdomid, wood) VALUES (500,1,0,1,0);
