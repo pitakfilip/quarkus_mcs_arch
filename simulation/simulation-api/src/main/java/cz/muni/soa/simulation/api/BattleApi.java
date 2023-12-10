@@ -1,6 +1,6 @@
 package cz.muni.soa.simulation.api;
 
-import cz.muni.soa.simulation.dto.DtoTroop;
+import cz.muni.soa.warfare.dto.DtoTroop;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -21,7 +21,7 @@ public interface BattleApi {
     @APIResponse(responseCode = "500", description = "Error in service dependencies")
     Response /*DtoBattle*/ createBattle(
             @PathParam("target") long target,
-            @RequestBody List<DtoTroop> troops
+            @RequestBody List<cz.muni.soa.warfare.dto.DtoTroop> troops
     );
 
     @GET

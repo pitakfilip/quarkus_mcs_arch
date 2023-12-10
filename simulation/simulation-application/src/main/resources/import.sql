@@ -1,3 +1,4 @@
+/*
 -- private TroopType troopType;
     -- MELEE,
     -- RANGED,
@@ -11,27 +12,27 @@
     -- RAM_VEHICLE,
     -- TREBUCHET,
 -- 1v1 brawl (already started)
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 2, 84, 100, 12, 0, 0);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 176, 200, 8, 0, 0);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 2, 84, 100, 12, 0, 0);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 176, 200, 8, 0, 0);
 -- 2v3 melee
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 0, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 0, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 0, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 1, 100, 100, 7, 0, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 1, 100, 100, 7, 0, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 0, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 0, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 0, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 1, 100, 100, 7, 0, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 1, 100, 100, 7, 0, -1);
 -- 2v3 melee + archers and big weak rams
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 1, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 1, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 1, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 1, 100, 100, 6, 1, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 1, 100, 100, 6, 1, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 50, 50, 3, 0, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 50, 50, 3, 0, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 50, 50, 3, 0, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 50, 50, 3, 0, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 50, 50, 3, 0, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 5, 200, 200, 2, 3, -1);
-insert into troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 5, 200, 200, 2, 3, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 1, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 1, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 0, 100, 100, 4, 1, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 1, 100, 100, 6, 1, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 1, 100, 100, 6, 1, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 50, 50, 3, 0, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 50, 50, 3, 0, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 50, 50, 3, 0, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 50, 50, 3, 0, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 1, 3, 50, 50, 3, 0, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 5, 200, 200, 2, 3, -1);
+insert into simulation_troop (abstract, troopType, troopClass, hp, originalHp, dps, armor, target) values('Troop', 0, 5, 200, 200, 2, 3, -1);
 
 -- private BattleStatus status;
     -- WAITING,
@@ -68,3 +69,4 @@ insert into defender_troops (id, troop_id) values(3, 16);
 insert into defender_troops (id, troop_id) values(3, 17);
 insert into attacker_troops (id, troop_id) values(3, 18);
 insert into defender_troops (id, troop_id) values(3, 19);
+*/
