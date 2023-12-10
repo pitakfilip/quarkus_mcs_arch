@@ -19,7 +19,7 @@ public interface AuthApi {
             responseCode = "200",
             description = "Alles gutes"
     )
-    Response signup(@RequestBody DtoAuthRequest authRequest);
+    Response signup(@RequestBody DtoAuthRequest authRequest) throws Exception;
 
     @POST
     @Path("/login")

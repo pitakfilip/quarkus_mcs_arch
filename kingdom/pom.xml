@@ -27,6 +27,7 @@
         <!--   DOMAIN     -->
         <infrastructure.version>1.0-SNAPSHOT</infrastructure.version>
         <warfare.version>1.0-SNAPSHOT</warfare.version>
+        <foundation.version>1.0-SNAPSHOT</foundation.version>
         <!--   TECH     -->
         <quarkus.platform.version>3.6.0</quarkus.platform.version>
         <jakarta-persistence.version>3.1.0</jakarta-persistence.version>
@@ -54,6 +55,11 @@
                 <groupId>cz.muni.soa.warfare</groupId>
                 <artifactId>warfare-api</artifactId>
                 <version>${warfare.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cz.muni.soa.foundation</groupId>
+                <artifactId>foundation-api</artifactId>
+                <version>${foundation.version}</version>
             </dependency>
             
             <dependency>

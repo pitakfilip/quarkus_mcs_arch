@@ -26,6 +26,7 @@ public class AuthResource implements AuthApi {
     JwtGenerator jwtGenerator;
 
     @Override
+    @Transactional
     public Response signup(DtoAuthRequest request) {
         if (!authService.canCreate(request.username)) {
             return Response.status(Response.Status.CONFLICT).build();

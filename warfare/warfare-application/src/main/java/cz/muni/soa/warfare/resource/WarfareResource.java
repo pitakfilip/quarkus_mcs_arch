@@ -18,7 +18,6 @@ public class WarfareResource implements WarfareApi {
     @Transactional
     public Response initKingdomTroops() {
         service.initializeKingdomsDomain();
-        Log.info("" + service.getAvailableTroops());
         return Response.ok().build();
     }
 }

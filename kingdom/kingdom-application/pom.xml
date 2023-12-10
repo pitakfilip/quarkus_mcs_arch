@@ -31,6 +31,10 @@
             <artifactId>infrastructure-application</artifactId>
         </dependency>
         <dependency>
+            <groupId>cz.muni.soa.foundation</groupId>
+            <artifactId>foundation-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>cz.muni.soa.warfare</groupId>
             <artifactId>warfare-api</artifactId>
         </dependency>

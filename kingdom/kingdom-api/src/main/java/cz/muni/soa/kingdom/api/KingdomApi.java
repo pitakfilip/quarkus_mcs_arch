@@ -3,6 +3,7 @@ package cz.muni.soa.kingdom.api;
 import cz.muni.soa.kingdom.dto.DtoKingdom;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
@@ -26,5 +27,14 @@ public interface KingdomApi {
             description = ""
     )
     void addExperience(@PathParam("amount") int amount);
-    
+
+    @GET
+    @Path("/init")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "")
+    @APIResponse(
+            responseCode = "200",
+            description = ""
+    )
+    Response setupKingdom() throws Exception;
 }

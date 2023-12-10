@@ -9,8 +9,10 @@ import cz.muni.soa.kingdom.dto.DtoKingdom;
 
 import cz.muni.soa.kingdom.domain.Kingdom;
 import cz.muni.soa.kingdom.repository.IKingdomRepository;
+import cz.muni.soa.kingdom.service.KingdomService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
@@ -28,6 +30,9 @@ public class KingdomResource implements KingdomApi {
     IKingdomRepository kingdomRepository;
 
     @Inject
+    KingdomService service;
+    
+    @Inject
     AuthContext authContext;
     
     @Override
@@ -40,6 +45,12 @@ public class KingdomResource implements KingdomApi {
         return KingdomAssembler.toDto(result);
     }
 
+    @Override
+    public Response setupKingdom() throws Exception {
+        service.initKingdom();
+        return Response.ok().build();
+    }
+    
     @Override
     public void addExperience(int amount) {
         KingdomOperations ko = new KingdomOperations(kingdomRepository);
