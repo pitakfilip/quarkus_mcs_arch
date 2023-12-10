@@ -4,18 +4,22 @@ name: wild-tribes
 
 services:
 
-    db:
-        image: postgres
-        container_name: postgres_db
-        restart: always
+    postgre-db:
+        image: "postgres:alpine"
+        environment:
+            - POSTGRES_USER=quarkus
+            - POSTGRES_PASSWORD=quarkus
+            - POSTGRES_DB=wild_tribes_db
+        healthcheck:
+            test: [ "CMD-SHELL", "pg_isready -U notif_management_service -d notif_management" ]
+            interval: 20s
+            timeout: 15s
+            retries: 10
         ports:
             - "5432:5432"
-        environment:
-            - POSTGRES_DB=mcs_db
-            - POSTGRES_USER=root
-            - POSTGRES_PASSWORD=groot
-            #        volumes:
-#                -./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+        networks:
+            - application
+
 
     consul:
         image: consul:1.15
@@ -48,3 +52,6 @@ services:
         #     - GF_AUTH_ANONYMOUS_ENABLED=true
         #     - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
 
+networks:
+    application:
+        driver: bridge
