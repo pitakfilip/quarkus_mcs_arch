@@ -139,4 +139,13 @@ public class CombatUtilities {
         }
         attackEnemies(battle.getDefenderTroops(), battle.getAttackerTroops());
     }
+
+    public boolean hasBeenDestroyed(List<Troop> troops) {
+        for (Troop troop : troops) {
+            if (troop.getHp() > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -40,6 +40,7 @@ public class BattleService {
     @Inject
     AuthContext context;
 
+    @Transactional
     public Response /*DtoBattle*/ createBattle(long target, List<DtoTroop> troops) {
         CombatUtilities combatUtilities = new CombatUtilities(troopRepository, battleRepository);
 
@@ -79,7 +80,59 @@ public class BattleService {
         return Response.ok(BattleAssembler.toDto(battle)).build();
     }
 
-    public Response /*DtoBattle*/ performCombatRound(long id) {
+    @Transactional
+    void performCombatRound(long id) {
+        // TODO void too, this won't be exposed after CRONs work
+        CombatUtilities combatUtilities = new CombatUtilities(troopRepository, battleRepository);
+
+        Battle battle = battleRepository.getById(id);
+        combatUtilities.combatRound(battle);
+        battleRepository.persist(battle);
+    }
+
+    @Transactional
+    void checkEndOfBattle(long id) {
+        CombatUtilities combatUtilities = new CombatUtilities(troopRepository, battleRepository);
+
+        Battle battle = battleRepository.getById(id);
+
+        if (combatUtilities.hasBeenDestroyed(battle.getAttackerTroops())) {
+            battle.setResult(BattleResult.DEFENDER_WON);
+            battle.setStatus(BattleStatus.FINISHING);
+            battleRepository.persist(battle);
+            return;
+        }
+        if (combatUtilities.hasBeenDestroyed(battle.getDefenderTroops())) {
+            battle.setResult(BattleResult.ATTACKER_WON);
+            battle.setStatus(BattleStatus.FINISHING);
+            battleRepository.persist(battle);
+            return;
+        }
+        // TODO stalemate
+    }
+
+    @Transactional
+    void startBattle(long id) {
+        CombatUtilities combatUtilities = new CombatUtilities(troopRepository, battleRepository);
+
+        Battle battle = battleRepository.getById(id);
+        assert(battle.getStatus() == BattleStatus.WAITING);
+        battle.setStatus(BattleStatus.ONGOING);
+        battleRepository.persist(battle);
+    }
+
+    @Transactional
+    void finishBattle(long id) {
+        CombatUtilities combatUtilities = new CombatUtilities(troopRepository, battleRepository);
+
+        Battle battle = battleRepository.getById(id);
+        assert(battle.getStatus() == BattleStatus.FINISHING);
+        // TODO call warfare and shit
+        battle.setStatus(BattleStatus.FINISHED);
+        battleRepository.persist(battle);
+    }
+
+    public Response /*DtoBattle*/ advanceBattle(long id) {
         CombatUtilities combatUtilities = new CombatUtilities(troopRepository, battleRepository);
 
         Battle battle = battleRepository.getById(id);
@@ -87,8 +140,17 @@ public class BattleService {
             return Response.status(Response.Status.NOT_FOUND).entity("Battle " + id + " not found.").build();
         }
 
-        combatUtilities.combatRound(battle);
-        battleRepository.persist(battle);
+        assert(battle.getStatus() != BattleStatus.FINISHED);
+        switch (battle.getStatus()) {
+            case WAITING:
+                    startBattle(id);
+            case ONGOING:
+                    performCombatRound(id);
+                    checkEndOfBattle(id);
+            case FINISHING:
+                    finishBattle(id);
+        }
+
         return Response.ok(BattleAssembler.toDto(battle)).build();
     }
 }

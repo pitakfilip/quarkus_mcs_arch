@@ -31,10 +31,11 @@ public interface BattleApi {
     @APIResponse(responseCode = "404")
     Response /*DtoBattle*/ getBattle(@PathParam("id") long id);
 
+    // TODO eventually remove when CRONs work
     @POST
-    @Path("/round/{id}")
+    @Path("/advance/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @APIResponse(responseCode = "200")
     @APIResponse(responseCode = "404")
-    Response /*DtoBattle*/ performCombatRound(@PathParam("id") long id);
+    Response /*DtoBattle*/ advanceBattle(@PathParam("id") long id);
 }
