@@ -112,8 +112,6 @@ public class WarfareOperations {
         kingdomsTroops.setTroops(updatedKingdomsTroops);
 
         removeFallenTroops(dec,kingdomId);
-
-        System.out.println("ya");
     }
 
     public int getCostOfRequest(List<TroopRequest> requests) {

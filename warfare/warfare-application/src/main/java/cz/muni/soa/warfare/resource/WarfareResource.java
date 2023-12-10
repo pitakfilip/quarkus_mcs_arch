@@ -18,7 +18,6 @@ public class WarfareResource implements WarfareApi {
     @Transactional
     public Response initKingdomTroops() throws Exception {
         service.initializeKingdomsDomain();
-
 //        service.getMoney();
         return Response.ok().build();
     }

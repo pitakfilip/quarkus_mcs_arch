@@ -63,11 +63,11 @@ public class WarfareService {
         warfareOperations.levelUpTroopClass(TroopClassAssembler.fromDto(tC), context.getKingdomId());
     }
 
-    public void warResult(List<Long> dead, List<Long> survived){
+    public void warResult(List<Long> dead, List<Long> survived,Long kingdomId){
         WarfareOperations warfareOperations = new WarfareOperations(kingdomsTroopsRepository,
                 levelRepository,
                 troopsRepository);
-        warfareOperations.warResult(dead,survived,context.getKingdomId());
+        warfareOperations.warResult(dead,survived,kingdomId);
     }
 
     public String trainTroops(List<DtoTroopRequest> requests) throws Exception {

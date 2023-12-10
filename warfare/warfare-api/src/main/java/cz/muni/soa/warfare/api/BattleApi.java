@@ -18,14 +18,15 @@ public interface BattleApi {
 
 
     @POST
-    @Path("/warRes")
+    @Path("/warRes/{kId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "")
     @APIResponse(
             responseCode = "200",
             description = ""
     )
-    Response warResult(@RequestBody DtoWarResult warResult);
+    Response warResult(@RequestBody DtoWarResult warResult,
+                       @PathParam("kId")Long kingdomId);
 
     @POST
     @Path("/sendToWar")
