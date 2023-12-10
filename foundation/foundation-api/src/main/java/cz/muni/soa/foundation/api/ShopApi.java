@@ -13,7 +13,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 public interface ShopApi {
 
-    @POST
+    @GET
     @Path("/funds/{type}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Check foundation's storage for a specific resource type, whether a requested amount is available.")
