@@ -51,6 +51,31 @@ services:
 #        command: "sh /kv-source/init_kv.sh"
 
 
+    prometheus:
+        image: prom/prometheus
+        container_name: prometheus
+        network_mode: host    # while services are running from an IDE
+        volumes:
+            - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+        command:
+            - --config.file=/etc/prometheus/prometheus.yml
+        ports:
+            - "9090:9090"
+
+    grafana:
+        # run monitoring/grafana/init.sh after first run to initialize datasource/dashboard
+        image: grafana/grafana
+        container_name: grafana
+        network_mode: host    # while services are running from an IDE
+        ports:
+            - "3000:3000"
+        # default username/password is admin/admin
+        # uncomment the following for anonymous access on a local deployment:
+        # environment:
+        #     - GF_AUTH_ANONYMOUS_ENABLED=true
+        #     - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+
+
 
 #   TODO postgres data: need entry data, setup accounts for each service, define structures, ...
 #    volumes:
