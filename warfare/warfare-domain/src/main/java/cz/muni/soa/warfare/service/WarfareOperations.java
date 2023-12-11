@@ -119,7 +119,7 @@ public class WarfareOperations {
 
         for (var t : requests){
             var r = TroopFactory.create(t.clazz);
-            sum += r.getCost();
+            sum += r.getCost()*t.amount;
         }
         return sum;
     }

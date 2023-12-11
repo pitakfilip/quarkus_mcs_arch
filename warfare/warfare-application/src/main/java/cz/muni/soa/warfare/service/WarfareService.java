@@ -75,13 +75,13 @@ public class WarfareService {
                 levelRepository,
                 troopsRepository);
         List<TroopRequest> reqTroops = RequestAssembler.fromDto(requests);
-        int costOfRequest = warfareOperations.getCostOfRequest(reqTroops);
-
-        var fundsState = getResourcesOfFoundation(costOfRequest);
-
-        if (fundsState.missing > 0){
-            return "Missing gold";
-        }
+//        int costOfRequest = warfareOperations.getCostOfRequest(reqTroops);
+//
+//        var fundsState = getResourcesOfFoundation(costOfRequest);
+//
+//        if (fundsState.missing > 0){
+//            return "Missing gold";
+//        }
 
 
 

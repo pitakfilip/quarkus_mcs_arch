@@ -5,21 +5,17 @@ name: wild-tribes
 services:
 
     postgre-db:
-        image: "postgres:alpine"
+        image: "postgres"
         environment:
             - POSTGRES_USER=quarkus
             - POSTGRES_PASSWORD=quarkus
-            - POSTGRES_DB=wild_tribes_db
-        healthcheck:
-            test: [ "CMD-SHELL", "pg_isready -U notif_management_service -d notif_management" ]
-            interval: 20s
-            timeout: 15s
-            retries: 10
+            - POSTGRES_DB=quarkus
         ports:
             - "5432:5432"
         networks:
             - application
-
+        volumes:
+            - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
 
     consul:
         image: consul:1.15.4
