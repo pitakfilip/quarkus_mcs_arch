@@ -1,5 +1,5 @@
 cd ..
-HOME=$(PWD)
+HOME=${PWD}
 
 #cd $HOME/infrastructure
 #mvn clean install

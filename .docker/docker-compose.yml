@@ -50,18 +50,16 @@ services:
     prometheus:
         image: prom/prometheus
         container_name: prometheus
-#        network_mode: host    # while services are running from an IDE
+        network_mode: host
         volumes:
             - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
         command:
             - --config.file=/etc/prometheus/prometheus.yml
         ports:
             - "9090:9090"
-        networks: 
-            - monitoring
 
     grafana:
-        # run monitoring/grafana/init.sh after first run to initialize datasource/dashboard
+        # run ./grafana-init.sh after first run to initialize datasource/dashboard
         image: grafana/grafana
         container_name: grafana
         network_mode: host    # while services are running from an IDE
