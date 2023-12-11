@@ -6,7 +6,7 @@
     <parent>
         <groupId>cz.muni.soa</groupId>
         <artifactId>warfare</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
 
     <groupId>cz.muni.soa.warfare</groupId>
@@ -19,13 +19,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>cz.muni.soa.kingdom</groupId>
-            <artifactId>kingdom-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        
-        
         <dependency>
             <groupId>cz.muni.soa.warfare</groupId>
             <artifactId>warfare-api</artifactId>
@@ -90,6 +83,10 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-opentelemetry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-container-image-docker</artifactId>
         </dependency>
     </dependencies>
 

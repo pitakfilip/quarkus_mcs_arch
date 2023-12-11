@@ -6,7 +6,7 @@
     <parent>
         <groupId>cz.muni.soa</groupId>
         <artifactId>kingdom</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
 
     <groupId>cz.muni.soa.kingdom</groupId>
@@ -87,7 +87,10 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-opentelemetry</artifactId>
         </dependency>
-        
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-container-image-docker</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
