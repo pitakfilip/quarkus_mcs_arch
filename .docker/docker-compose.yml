@@ -4,34 +4,28 @@ name: wild-tribes
 
 services:
 
-    postgre-db:
-        image: "postgres"
-        environment:
-            - POSTGRES_USER=quarkus
-            - POSTGRES_PASSWORD=quarkus
-            - POSTGRES_DB=quarkus
-        ports:
-            - "5432:5432"
-        networks:
-            - appdb
-        volumes:
-            - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+#    postgre-db:
+#        image: "postgres"
+#        environment:
+#            - POSTGRES_USER=quarkus
+#            - POSTGRES_PASSWORD=quarkus
+#            - POSTGRES_DB=quarkus
+#        ports:
+#            - "5432:5432"
+#        volumes:
+#            - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
 
     consul:
         image: consul:1.15.4
         ports:
             - "8500:8500"
             - "8600:8600/udp"
-        environment:
-            CONSUL_BIND_INTERFACE: eth0
         command: "agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0 -node Agent1"
         healthcheck:
             test: [ "CMD", "curl", "-f", "http://localhost:8500/v1/health/node/Agent1" ]
             interval: 10s
             timeout: 10s
             retries: 5
-        networks:
-            - registry
             
     # Jaeger
     jaeger-tracing:
@@ -44,13 +38,11 @@ services:
             - "14250:14250" # Receive from external otel-collector, optional
         environment:
             - COLLECTOR_OTLP_ENABLED=true
-        networks:
-            - tracing
 
     prometheus:
         image: prom/prometheus
         container_name: prometheus
-        network_mode: host
+        network_mode: host    # while services are running from an IDE
         volumes:
             - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
         command:
@@ -70,86 +62,3 @@ services:
         # environment:
         #     - GF_AUTH_ANONYMOUS_ENABLED=true
         #     - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-
-    foundation:
-        build:
-            context: ./../foundation/foundation-application
-            dockerfile: ./src/main/docker/Dockerfile.jvm
-        image: wildtribes/foundation
-        container_name: foundation_service
-        environment:
-            - QUARKUS_DATASOURCE_URL=jdbc:postgresql://localhost:5432/quarkus
-            - QUARKUS_DATASOURCE_USERNAME=foundation_acc
-            - QUARKUS_DATASOURCE_PASSWORD=f
-        ports:
-            - "8060:8060"
-        networks:
-            - appdb
-            - registry
-            - monitoring
-            - tracing
-    
-    warfare:
-        build:
-            context: ./../warfare/warfare-application
-            dockerfile: ./src/main/docker/Dockerfile.jvm
-        image: wildtribes/warfare
-        container_name: warfare_service
-        environment:
-            - QUARKUS_DATASOURCE_URL=jdbc:postgresql://localhost:5432/quarkus
-            - QUARKUS_DATASOURCE_USERNAME=warfare_acc
-            - QUARKUS_DATASOURCE_PASSWORD=w
-        ports:
-            - "8070:8070"
-        networks:
-            - appdb
-            - registry
-            - monitoring
-            - tracing
-
-    kingdom:
-        build:
-            context: ./../kingdom/kingdom-application
-            dockerfile: ./src/main/docker/Dockerfile.jvm
-        image: wildtribes/kingdom
-        container_name: kingdom_service
-        environment:
-            - QUARKUS_DATASOURCE_URL=jdbc:postgresql://localhost:5432/quarkus
-            - QUARKUS_DATASOURCE_USERNAME=kingdom_acc
-            - QUARKUS_DATASOURCE_PASSWORD=k
-        ports:
-            - "8080:8080"
-        networks:
-            - appdb
-            - registry
-            - monitoring
-            - tracing
-
-    simulation:
-        build:
-            context: ./../simulation/simulation-application
-            dockerfile: ./src/main/docker/Dockerfile.jvm
-        image: wildtribes/simulation
-        container_name: simulation_service
-        environment:
-            - QUARKUS_DATASOURCE_URL=jdbc:postgresql://localhost:5432/quarkus
-            - QUARKUS_DATASOURCE_USERNAME=simulation_acc
-            - QUARKUS_DATASOURCE_PASSWORD=s
-        ports:
-            - "8090:8090"
-        networks:
-            - appdb
-            - registry
-            - monitoring
-            - tracing
-        
-        
-networks:
-    appdb:
-        driver: bridge
-    registry:
-        driver: bridge
-    monitoring:
-        driver: bridge
-    tracing:
-        driver: bridge

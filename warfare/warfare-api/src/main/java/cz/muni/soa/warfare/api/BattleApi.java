@@ -15,8 +15,6 @@ import java.util.List;
 public interface BattleApi {
 
 
-
-
     @POST
     @Path("/warRes/{kId}")
     @Produces(MediaType.APPLICATION_JSON)

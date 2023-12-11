@@ -10,7 +10,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
-@Path("battle")
+@Path("/public/battle")
 public class BattleResource implements BattleApi {
     @Inject
     WarfareService service;

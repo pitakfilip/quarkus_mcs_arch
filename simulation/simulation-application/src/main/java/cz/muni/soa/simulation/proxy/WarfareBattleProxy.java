@@ -6,7 +6,7 @@ import jakarta.ws.rs.Path;
 import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-@Path("/battle")
+@Path("/public/battle")
 @RegisterClientHeaders(ServiceAuthHeaderPropagation.class)
 @RegisterRestClient(baseUri = "stork://warfare")
 public interface WarfareBattleProxy extends BattleApi {
