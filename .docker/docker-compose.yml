@@ -13,7 +13,7 @@ services:
         ports:
             - "5432:5432"
         networks:
-            - application
+            - database
         volumes:
             - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
 
@@ -30,6 +30,8 @@ services:
             interval: 10s
             timeout: 10s
             retries: 5
+        networks:
+            - registry
             
     # Jaeger
     jaeger-tracing:
@@ -42,6 +44,8 @@ services:
             - "14250:14250" # Receive from external otel-collector, optional
         environment:
             - COLLECTOR_OTLP_ENABLED=true
+        networks:
+            - tracing
 
     prometheus:
         image: prom/prometheus
@@ -53,6 +57,8 @@ services:
             - --config.file=/etc/prometheus/prometheus.yml
         ports:
             - "9090:9090"
+        networks: 
+            - monitoring
 
     grafana:
         # run monitoring/grafana/init.sh after first run to initialize datasource/dashboard
@@ -67,6 +73,85 @@ services:
         #     - GF_AUTH_ANONYMOUS_ENABLED=true
         #     - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
 
+    foundation:
+        build:
+            context: ./../foundation/foundation-application
+            dockerfile: ./src/main/docker/Dockerfile.jvm
+        image: wildtribes/foundation
+        container_name: foundation_service
+        environment:
+            - QUARKUS_DATASOURCE_URL=jdbc:postgresql://localhost:5432/quarkus
+            - QUARKUS_DATASOURCE_USERNAME=foundation_acc
+            - QUARKUS_DATASOURCE_PASSWORD=f
+        ports:
+            - "8060:8060"
+        networks:
+            - database
+            - registry
+            - monitoring
+            - tracing
+    
+    warfare:
+        build:
+            context: ./../warfare/warfare-application
+            dockerfile: ./src/main/docker/Dockerfile.jvm
+        image: wildtribes/warfare
+        container_name: warfare_service
+        environment:
+            - QUARKUS_DATASOURCE_URL=jdbc:postgresql://localhost:5432/quarkus
+            - QUARKUS_DATASOURCE_USERNAME=warfare_acc
+            - QUARKUS_DATASOURCE_PASSWORD=w
+        ports:
+            - "8070:8070"
+        networks:
+            - database
+            - registry
+            - monitoring
+            - tracing
+
+    kingdom:
+        build:
+            context: ./../kingdom/kingdom-application
+            dockerfile: ./src/main/docker/Dockerfile.jvm
+        image: wildtribes/kingdom
+        container_name: kingdom_service
+        environment:
+            - QUARKUS_DATASOURCE_URL=jdbc:postgresql://localhost:5432/quarkus
+            - QUARKUS_DATASOURCE_USERNAME=kingdom_acc
+            - QUARKUS_DATASOURCE_PASSWORD=k
+        ports:
+            - "8080:8080"
+        networks:
+            - database
+            - registry
+            - monitoring
+            - tracing
+
+    simulation:
+        build:
+            context: ./../simulation/simulation-application
+            dockerfile: ./src/main/docker/Dockerfile.jvm
+        image: wildtribes/simulation
+        container_name: simulation_service
+        environment:
+            - QUARKUS_DATASOURCE_URL=jdbc:postgresql://localhost:5432/quarkus
+            - QUARKUS_DATASOURCE_USERNAME=simulation_acc
+            - QUARKUS_DATASOURCE_PASSWORD=s
+        ports:
+            - "8090:8090"
+        networks:
+            - database
+            - registry
+            - monitoring
+            - tracing
+        
+        
 networks:
-    application:
+    database:
+        driver: bridge
+    registry:
+        driver: bridge
+    monitoring:
+        driver: bridge
+    tracing:
         driver: bridge
