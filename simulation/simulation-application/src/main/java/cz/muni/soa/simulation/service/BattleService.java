@@ -79,7 +79,6 @@ public class BattleService {
         battle.setAttackerTroops(attackerTroops);
         battle.setDefenderTroops(defenderTroops);  // later
 
-        // TODO THIS MIGHT FAIL
         List<Long> troopIds = troops.stream().map(troop -> troop.id).collect(Collectors.toList());
         warfareBattleApi.sendToWar(troopIds);
 
@@ -90,7 +89,7 @@ public class BattleService {
         return Response.ok(BattleAssembler.toDto(battle)).build();
     }
 
-    @Scheduled(every = "2s")
+    @Scheduled(every = "4s")
     public void advanceFirstUnfinishedBattle() {
         CombatUtilities combatUtilities = new CombatUtilities(troopRepository, battleRepository);
 
@@ -256,7 +255,6 @@ public class BattleService {
         // call warfare with deceased/survivor troops for each of the kingdoms
         DtoWarResult attackerResult = troopAssembler.dtoToWarResultDto(battle.getAttackerTroops());
         DtoWarResult defenderResult = troopAssembler.dtoToWarResultDto(battle.getDefenderTroops());
-        // TODO THIS MIGHT ALSO FAIL
         warfareBattleApi.warResult(attackerResult, battle.getAttacker());
         warfareBattleApi.warResult(defenderResult, battle.getDefender());
 
