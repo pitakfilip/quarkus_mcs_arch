@@ -75,18 +75,18 @@ public class WarfareService {
                 levelRepository,
                 troopsRepository);
         List<TroopRequest> reqTroops = RequestAssembler.fromDto(requests);
-//        int costOfRequest = warfareOperations.getCostOfRequest(reqTroops);
-//
-//        var fundsState = getResourcesOfFoundation(costOfRequest);
-//
-//        if (fundsState.missing > 0){
-//            return "Missing gold";
-//        }
+        int costOfRequest = warfareOperations.getCostOfRequest(reqTroops);
+
+        var fundsState = getResourcesOfFoundation(costOfRequest);
+
+        if (fundsState.missing > 0){
+            return "Missing gold";
+        }
 
 
-
-
-        return warfareOperations.trainTroops(reqTroops, context.getKingdomId());
+        String res = warfareOperations.trainTroops(reqTroops, context.getKingdomId());
+        shopProxy.spendResources(DtoResourceType.GOLD,costOfRequest);
+        return "Troops added successfully";
     }
 
     public DtoResourceRequest getResourcesOfFoundation( int requestCost) throws Exception {
