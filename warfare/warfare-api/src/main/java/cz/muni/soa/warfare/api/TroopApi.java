@@ -17,11 +17,10 @@ public interface TroopApi {
     @GET
     @Path("/available/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "")
-    @APIResponse(
-            responseCode = "200",
-            description = ""
-    )
+    @Operation(summary = "Request troops of a kingdom that are not currently at war")
+    @APIResponse(responseCode = "200", description = "Request successfully processed.")
+    @APIResponse(responseCode = "401", description = "Attempted unauthorized access to protected endpoint.")
+    @APIResponse(responseCode = "500", description = "Server error thrown by domain validations.")
     List<DtoTroop> getAvailableTroops(@PathParam("id") Long id);
 
 
@@ -30,11 +29,10 @@ public interface TroopApi {
     @Path("/levelUp")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(summary = "")
-    @APIResponse(
-            responseCode = "200",
-            description = ""
-    )
+    @Operation(summary = "Levels up class of troop")
+    @APIResponse(responseCode = "200", description = "Request successfully processed.")
+    @APIResponse(responseCode = "401", description = "Attempted unauthorized access to protected endpoint.")
+    @APIResponse(responseCode = "500", description = "Server error thrown by domain validations.")
     Response levelUpClass(@QueryParam("class") DtoTroopClass troopClass);
 
 
@@ -43,10 +41,9 @@ public interface TroopApi {
     @Path("/trainTroops")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(summary = "")
-    @APIResponse(
-            responseCode = "200",
-            description = ""
-    )
+    @Operation(summary = "Orders troops to train")
+    @APIResponse(responseCode = "200", description = "Request successfully processed.")
+    @APIResponse(responseCode = "401", description = "Attempted unauthorized access to protected endpoint.")
+    @APIResponse(responseCode = "500", description = "Server error thrown by domain validations.")
     Response trainTroops(@RequestBody List<DtoTroopRequest> requests) throws Exception;
 }

@@ -13,7 +13,7 @@ services:
         ports:
             - "5432:5432"
         networks:
-            - database
+            - appdb
         volumes:
             - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
 
@@ -50,7 +50,7 @@ services:
     prometheus:
         image: prom/prometheus
         container_name: prometheus
-        network_mode: host    # while services are running from an IDE
+#        network_mode: host    # while services are running from an IDE
         volumes:
             - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
         command:
@@ -86,7 +86,7 @@ services:
         ports:
             - "8060:8060"
         networks:
-            - database
+            - appdb
             - registry
             - monitoring
             - tracing
@@ -104,7 +104,7 @@ services:
         ports:
             - "8070:8070"
         networks:
-            - database
+            - appdb
             - registry
             - monitoring
             - tracing
@@ -122,7 +122,7 @@ services:
         ports:
             - "8080:8080"
         networks:
-            - database
+            - appdb
             - registry
             - monitoring
             - tracing
@@ -140,14 +140,14 @@ services:
         ports:
             - "8090:8090"
         networks:
-            - database
+            - appdb
             - registry
             - monitoring
             - tracing
         
         
 networks:
-    database:
+    appdb:
         driver: bridge
     registry:
         driver: bridge

@@ -20,22 +20,20 @@ public interface BattleApi {
     @POST
     @Path("/warRes/{kId}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "")
-    @APIResponse(
-            responseCode = "200",
-            description = ""
-    )
+    @Operation(summary = "Saves which troops have survived the war and which died")
+    @APIResponse(responseCode = "200", description = "Request successfully processed.")
+    @APIResponse(responseCode = "401", description = "Attempted unauthorized access to protected endpoint.")
+    @APIResponse(responseCode = "500", description = "Server error thrown by domain validations.")
     Response warResult(@RequestBody DtoWarResult warResult,
                        @PathParam("kId")Long kingdomId);
 
     @POST
     @Path("/sendToWar")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "")
-    @APIResponse(
-            responseCode = "200",
-            description = ""
-    )
+    @Operation(summary = "Sends troops to battle")
+    @APIResponse(responseCode = "200", description = "Request successfully processed.")
+    @APIResponse(responseCode = "401", description = "Attempted unauthorized access to protected endpoint.")
+    @APIResponse(responseCode = "500", description = "Server error thrown by domain validations.")
     Response sendToWar(@RequestBody List<Long> troops);
 
 }

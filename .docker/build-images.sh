@@ -1,13 +1,13 @@
 cd ..
 HOME=$(PWD)
 
-cd $HOME/infrastructure
-mvn clean install
-
-cd $HOME/foundation
-mvn clean install
+#cd $HOME/infrastructure
+#mvn clean install
+#
+#cd $HOME/foundation
+#mvn clean install
 cd $HOME/foundation/foundation-application
-mvn install -Dquarkus.container-image.build=true -Dquarkus.container-image.group=wildTribes
+./mvnw install -Dquarkus.container-image.build=true -Dquarkus.container-image.group=wildTribes
 
 #
 #cd $HOME/warfare

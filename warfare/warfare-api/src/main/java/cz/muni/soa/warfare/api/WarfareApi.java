@@ -13,11 +13,10 @@ public interface WarfareApi {
     @POST
     @Path("/initTroops")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "")
-    @APIResponse(
-            responseCode = "200",
-            description = ""
-    )
+    @Operation(summary = "Initializes all needed entities for troops")
+    @APIResponse(responseCode = "200", description = "Request successfully processed.")
+    @APIResponse(responseCode = "401", description = "Attempted unauthorized access to protected endpoint.")
+    @APIResponse(responseCode = "500", description = "Server error thrown by domain validations.")
     Response initKingdomTroops() throws Exception;
 
 
